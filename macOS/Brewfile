@@ -1,0 +1,98 @@
+# brew version
+hb = `brew -v`
+
+# fail if Homebrew is not installed, (or if it's not in $PATH)
+if !hb.include? "Homebrew"
+  abort("ERROR: Homebrew does not appear to be installed!")
+end
+
+# specify a directory to install
+cask_args appdir: "/Applications"
+
+# install packages
+tap "homebrew/cask" || true
+brew "zsh"
+brew "zsh-completions"
+brew "bash-completion"
+brew "make"
+brew "git"
+brew "git-extras"
+brew "git-secrets"
+brew "tree"
+brew "tmux"
+brew "stow"
+tap "neovim/neovim" || true
+brew "neovim"
+brew "awscli"
+brew "curl"
+brew "go"
+brew "goenv"
+brew "pyenv"
+brew "pipx"
+brew "jq"
+brew "yq"
+brew "ag"
+brew "ripgrep"
+brew "xz"
+brew "wget"
+brew "minikube"
+brew "htop"
+brew "terraform"
+brew "maven"
+brew "gradle"
+brew "sbt"
+brew "watch"
+brew "lsd"
+brew "fzf"
+brew "docker-completion"
+
+# Casks
+cask "google-chrome"
+cask "alfred"
+cask "virtualbox"
+cask "slack"
+cask "spotify"
+cask "docker"
+cask "visual-studio-code"
+cask "keeper-password-manager"
+cask "intellij-idea@eap"
+cask "firefox@developer-edition"
+cask "zoom"
+cask "vlc"
+cask "postman"
+cask "bbedit"
+cask "raycast"
+cask "notion"
+cask "shottr"
+cask "the-unarchiver"
+cask "obsidian"
+cask "onyx"
+
+# terminal emulators
+cask "warp"
+cask "alacritty"
+cask "iterm2"
+
+# MAIN FONTS (https://fonts.google.com/)
+cask "font-anonymous-pro"      # https://www.marksimonson.com/fonts/view/anonymous-pro
+cask "font-bebas-neue"         # https://fonts.adobe.com/fonts/bebas-neue
+cask "font-courier-prime"      # https://quoteunquoteapps.com/courierprime/
+cask "font-fira-code"          # https://github.com/tonsky/FiraCode
+cask "font-ia-writer-duo"      # https://github.com/iaolo/iA-Fonts/
+cask "font-ia-writer-duospace" # https://ia.net/topics/in-search-of-the-perfect-writing-font
+cask "font-ia-writer-mono"     # https://github.com/iaolo/iA-Fonts/
+cask "font-ia-writer-quattro"  # https://ia.net/topics/a-typographic-christmas
+cask "font-inconsolata"        # https://levien.com/type/myfonts/inconsolata.html
+cask "font-input"              # https://input.djr.com/
+cask "font-intel-one-mono"     # https://github.com/intel/intel-one-mono/
+cask "font-jetbrains-mono"     # https://www.jetbrains.com/lp/mono/
+cask "font-iosevka"            # https://typeof.net/Iosevka/customizer
+cask "font-liberation"         # https://github.com/liberationfonts/liberation-fonts
+cask "font-red-hat-mono"       # https://github.com/RedHatOfficial/RedHatFont
+cask "font-ubuntu-mono"        # https://design.ubuntu.com/font
+cask "font-victor-mono"        # https://github.com/rubjo/victor-mono
+
+# NERD FONTS (https://www.nerdfonts.com/)
+cask "font-dejavu-sans-mono-nerd-font"
+cask "font-inconsolata-go-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
