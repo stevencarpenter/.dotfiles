@@ -99,13 +99,14 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 # aliases
-alias gfp='git fetch --all && git pull'
-alias docker-clean-unused='docker system prune --all --force --volumes'
-alias docker-clean-all='docker stop $(docker container ls -a -q); docker system prune -a -f --volumes'
-alias vi='nvim'
-alias vim='nvim'
-alias nano='nvim'
-alias emacs='nvim'
+alias gfp="git fetch --all && git pull"
+alias docker-clean-unused="docker system prune --all --force --volumes"
+alias docker-clean-all="docker stop $(docker container ls -a -q); docker system prune -a -f --volumes"
+alias vi="nvim"
+alias vim="nvim"
+alias nano="nvim"
+alias emacs="nvim"
+alias pacman-browse="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 eval $(thefuck --alias)
 

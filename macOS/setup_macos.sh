@@ -1,31 +1,24 @@
 #!/usr/bin/env bash
 
+printf 'Setting up this macBook with all your shit. Make sure you already ran the commands from the README that installs git and brew.'
+printf 'This script will delete existing config folders and create symlinks with the ones in this repo!\n'
+printf 'It will also install a ton of stuff you need like applications, languages, and tooling.\n'
+
+read -r -p "Are you sure you want to contine? [y/N] " response
+response=${response,,}    # tolower
+if [[ ! "$response" =~ ^(yes|y)$ ]]; then exit 0; fi
+
 # XCODE
 sudo xcode-select --install
-
-# Add XDG env variables and ZDOTDIR so shell can find the configs where they belong in ~/.config
-sudo sh -c 'echo "
-if [[ -z \"\$XDG_CONFIG_HOME\" ]]
-then
-    export XDG_CONFIG_HOME=\"\$HOME/.config\"
-fi
-
-if [[ -d \"\$XDG_CONFIG_HOME/zsh\" ]]
-then
-    export ZDOTDIR=\"\$XDG_CONFIG_HOME/zsh\"
-fi
-
-# Set the data folder
-if [[ -z \"\$XDG_DATA_HOME\" ]]
-then
-    export XDG_DATA_HOME=\"\$HOME/.local/share\"
-fi
-" >> /etc/zsh/zenv'
 
 # Install Brewfile contents and make sure things are chyll (with a y)
 brew bundle --file=~/.dotfiles/macOS/Brewfile
 brew bundle check --verbose
 brew doctor
+
+# Make executable and run the script to setup the /etc/zsh/zshenv
+chmod +x ~/.dotfiles/scripts/populate_sys_zenv.sh
+bash .dotfiles/scripts/populate_sys_zenv.sh
 
 cd ~/.dotfiles/home/
 stow -vvv .
@@ -41,3 +34,8 @@ pyenv global 3
 # poetry
 pipx install poetry
 poetry -V
+
+# Install rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+

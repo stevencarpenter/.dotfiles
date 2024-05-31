@@ -12,8 +12,7 @@ Ensure you have the following installed on your system
 ssh-keygen -t ed25519 -C "$USER macbook @ $EPOCHSECONDS" -f ~/.ssh/ -q -N ""
 
 # Create directories
-mkdir -p ~/projects
-mkdir -p ~/programs
+mkdir -p ~/projects ~/programs
 ```
 
 ### Git and Stow
