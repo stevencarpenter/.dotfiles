@@ -1,5 +1,23 @@
 #!/usr/bin/env zsh
 
+# Debug profiling option for zsh. Run it with: time ZSH_DEBUGRC=1 zsh -i -c exit
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zmodload zsh/zprof
+fi
+
+# aliases
+# Note: Enclosing the value in single quotation marks (') will not expand any variables used with the command.
+# To expand the variables, use double quotation marks (").
+alias gfp='git fetch --all && git pull'
+alias docker-clean-unused='docker system prune --all --force --volumes'
+alias docker-clean-all='docker stop $(docker container ls -a -q); docker system prune -a -f --volumes'
+alias vi='nvim'
+alias vim='nvim'
+alias nano='nvim'
+alias emacs='nvim'
+alias pacman-browse="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -58,15 +76,6 @@ export NVM_DIR="$HOME/.config/nvm"
 
 zle_highlight=('paste:none')
 
-# aliases
-alias gfp="git fetch --all && git pull"
-alias docker-clean-unused="docker system prune --all --force --volumes"
-alias docker-clean-all="docker stop $(docker container ls -a -q); docker system prune -a -f --volumes"
-alias vi="nvim"
-alias vim="nvim"
-alias nano="nvim"
-alias emacs="nvim"
-alias pacman-browse="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 eval $(thefuck --alias)
 
@@ -74,3 +83,7 @@ eval $(thefuck --alias)
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zprof
+fi

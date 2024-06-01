@@ -20,11 +20,16 @@ brew doctor
 
 # Make executable and run the script to setup the /etc/zsh/zshenv
 chmod +x ~/.dotfiles/scripts/populate_home_zenv.sh
-sudo bash .dotfiles/scripts/populate_home_zenv.sh
+sudo bash ~/.dotfiles/scripts/populate_home_zenv.sh
 
+# Run stow to link dotfiles
 cd ~/.dotfiles/ || exit
 stow -vvv home
 cd ~ || exit
+
+#Run unix setup script
+chmod +x ~/.dotfiles/scripts/setup_unix.sh
+zsh ~/.dotfiles/scripts/setup_unix.sh
 
 # pipx
 pipx ensurepath
