@@ -1,18 +1,28 @@
 #!/usr/bin/env zsh
 
+# Debug profiling option for zsh. Run it with: time ZSH_DEBUGRC=1 zsh -i -c exit
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zmodload zsh/zprof
+fi
+
+# aliases
+# Note: Enclosing the value in single quotation marks (') will not expand any variables used with the command.
+# To expand the variables, use double quotation marks (").
+alias gfp='git fetch --all && git pull'
+alias docker-clean-unused='docker system prune --all --force --volumes'
+alias docker-clean-all='docker stop $(docker container ls -a -q); docker system prune -a -f --volumes'
+alias vi='nvim'
+alias vim='nvim'
+alias nano='nvim'
+alias emacs='nvim'
+alias pacman-browse="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Set the GPG_TTY to be the same as the TTY, either via the env var
-# or via the tty command.
-if [ -n "$TTY" ]; then
-  export GPG_TTY=$(tty)
-else
-  export GPG_TTY="$TTY"
 fi
 
 # Nix
@@ -22,10 +32,6 @@ fi
 # End Nix
 
 export PATH="/usr/local/bin:/usr/bin:$PATH"
-
-# SSH_AUTH_SOCK set to GPG to enable using gpgagent as the ssh agent.
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
 
 autoload -Uz compinit && compinit
 
@@ -46,7 +52,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
-zinit snippet OMZP::rust
+# zinit snippet OMZP::rust
 zinit snippet OMZP::command-not-found
 
 zinit light zsh-users/zsh-completions
@@ -58,54 +64,18 @@ export LC_ALL=en_US.UTF-8
 
 setopt auto_cd
 
-#export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="$PATH:$HOME/Library/flutter/bin"
-export LD_LIBRARY_PATH=/usr/local/lib
-
 # Completions
-source <(doctl completion zsh)
 source <(kubectl completion zsh)
 
 # P10k customizations
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.config/p10k/.p10k.zsh ]] && source ~/.config/p10k/.p10k.zsh
 
-# Fix for password store
-export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
-
-export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
-export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
-[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load N
-
-bindkey "^P" up-line-or-beginning-search
-bindkey "^N" down-line-or-beginning-search
-
-[ -s "$HOME/.svm/svm.sh" ] && source "$HOME/.svm/svm.sh"
-
-# Capslock command
-alias capslock="sudo killall -USR1 caps2esc"
-
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    export MOZ_ENABLE_WAYLAND=1
-fi
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 zle_highlight=('paste:none')
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
-
-# aliases
-alias gfp='git fetch --all && git pull'
-alias docker-clean-unused='docker system prune --all --force --volumes'
-alias docker-clean-all='docker stop $(docker container ls -a -q); docker system prune -a -f --volumes'
-alias vi='nvim'
-alias vim='nvim'
-alias nano='nvim'
-alias emacs='nvim'
 
 eval $(thefuck --alias)
 
@@ -114,4 +84,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zprof
+fi
