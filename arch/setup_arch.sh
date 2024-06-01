@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 # Make executable and run the script to setup the /etc/zsh/zshenv
 chmod +x ~/.dotfiles/scripts/populate_sys_zenv.sh
 bash .dotfiles/scripts/populate_sys_zenv.sh

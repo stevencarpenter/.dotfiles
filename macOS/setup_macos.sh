@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 printf 'Setting up this macBook with all your shit. Make sure you already ran the commands from the README that installs git and brew.'
 printf 'This script will delete existing config folders and create symlinks with the ones in this repo!\n'
 printf 'It will also install a ton of stuff you need like applications, languages, and tooling.\n'
@@ -17,12 +19,12 @@ brew bundle check --verbose
 brew doctor
 
 # Make executable and run the script to setup the /etc/zsh/zshenv
-chmod +x ~/.dotfiles/scripts/populate_sys_zenv.sh
-bash .dotfiles/scripts/populate_sys_zenv.sh
+chmod +x ~/.dotfiles/scripts/populate_home_zenv.sh
+sudo bash .dotfiles/scripts/populate_home_zenv.sh
 
-cd ~/.dotfiles/home/
-stow -vvv .
-cd ~
+cd ~/.dotfiles/ || exit
+stow -vvv home
+cd ~ || exit
 
 # pipx
 pipx ensurepath
@@ -36,6 +38,6 @@ pipx install poetry
 poetry -V
 
 # Install rustup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 

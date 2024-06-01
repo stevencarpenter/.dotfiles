@@ -45,6 +45,7 @@ brew "watch"
 brew "lsd"
 brew "fzf"
 brew "docker-completion"
+brew "thefuck"
 
 # Casks
 cask "google-chrome"

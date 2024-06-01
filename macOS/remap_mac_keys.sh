@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Credit to Brad Howes
 FROM='"HIDKeyboaLdModifierMappingSrc"'
 TO='"HIDKeyboardModifierMappingDst"'
