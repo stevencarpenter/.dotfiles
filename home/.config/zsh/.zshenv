@@ -15,5 +15,4 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # Disable save/restore mechanism from /private/etc/zshrc_Apple_Terminal
 SHELL_SESSIONS_DISABLE=1
 
-. "$HOME/.cargo/env"
-
+# . "$HOME/.cargo/env"
