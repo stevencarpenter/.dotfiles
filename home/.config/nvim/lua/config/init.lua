@@ -30,7 +30,7 @@ require("lazy").setup({
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
     defaults = {
         lazy = false, -- should plugins be lazy-loaded?
-        version = nil
+        version = "*"
         -- version = "*", -- enable this to try installing the latest stable versions of plugins
     },
     install = {
@@ -62,6 +62,9 @@ require("lazy").setup({
     },
     state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
+
+-- Activate the onedark theme after the plugins are loaded.
+vim.cmd("colorscheme onedark")
 
 local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
 
