@@ -60,10 +60,14 @@ return {{
             dockerls = {},
             bashls = {},
             gopls = {},
-            ruff_lsp = {},
             vimls = {},
-            yamlls = {}
+            yamlls = {},
+--             pylsp = {},
+--             terraform_lsp = {},
+--             postgres_lsp = {},
+--             lua_ls = {},
         },
+
         -- you can do any additional lsp server setup here
         -- return true if you don"t want this server to be setup with lspconfig
         setup = {

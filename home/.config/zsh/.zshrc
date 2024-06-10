@@ -32,7 +32,7 @@ zstyle ':z4h:' auto-update      'no'
 zstyle ':z4h:' auto-update-days '28'
 
 # Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey' keyboard  'pc'
+zstyle ':z4h:bindkey' keyboard  'mac'
 
 # Start tmux if not already in tmux.
 # zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
@@ -80,7 +80,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 z4h init || return
 
 # Extend PATH.
-path=(~/bin $path)
+path=(~/bin $HOME/.local/bin $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
@@ -114,7 +114,7 @@ function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 eval $(thefuck --alias)
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"

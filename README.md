@@ -32,13 +32,13 @@ brew install git stow
 
 ### Clone this repo y La Playa
 ```shell
-# Clone my dotfiles and python playa
-git clone git@github.com:stevencarpenter/python_playa.git ~/projects/
+# Clone my dotfiles
 git clone git@github.com:stevencarpenter/.dotfiles.git ~/
 ```
 
 
 ## Stow plan command. Remove n for live run.
 ```
-stow -nvvv ~/.dotfiles/home
+cd ~/.dotfiles
+stow -nvvv home
 ```
