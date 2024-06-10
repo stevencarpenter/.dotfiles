@@ -9,7 +9,7 @@ Ensure you have the following installed on your system
 ### Run Manually On Fresh OS Install for any Unix System
 ```shell
 # Setup ssh key
-ssh-keygen -t ed25519 -C "$USER macbook @ $EPOCHSECONDS" -f ~/.ssh/ -q -N ""
+ssh-keygen -t ed25519 -C "$USER macbook @ $EPOCHSECONDS"
 
 # Create directories
 mkdir -p ~/projects ~/programs

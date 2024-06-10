@@ -19,3 +19,5 @@ if [[ -d "$profile_dir" && -n "$(ls -A $profile_dir)" ]]; then
         source "$file"
     done
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
