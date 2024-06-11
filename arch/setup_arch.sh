@@ -6,8 +6,8 @@ set -ex
 sudo pacman -Syu ripgrep neovim tmux less strace
 
 # Make executable and run the script to setup the /etc/zsh/zshenv
-chmod +x ~/.dotfiles/scripts/populate_sys_zenv.sh
-bash .dotfiles/scripts/populate_sys_zenv.sh
+chmod +x ~/.dotfiles/scripts/populate_sys_zshenv.sh
+bash .dotfiles/scripts/populate_sys_zshenv.sh
 
 #Run unix setup script
 chmod +x ~/.dotfiles/scripts/setup_unix.sh
