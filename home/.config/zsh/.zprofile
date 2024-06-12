@@ -13,7 +13,9 @@
 export SHELL_SESSION_DIR=$XDG_STATE_HOME/zsh/sessions
 export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
 
-
+# Cloudflare Secrets Lumin
+export CLOUDFLARE_API_KEY="password"
+export CLOUDFLARE_EMAIL="scarpenter@lumindigital.com"
 
 profile_dir="${ZDOTDIR}/profile.d"
 if [[ -d "$profile_dir" && -n "$(ls -A $profile_dir)" ]]; then
