@@ -53,6 +53,9 @@ brew "yamllint"
 brew "tflint"
 brew "golangci-lint"
 brew "pre-commit"
+brew "mise"
+brew "mysql"
+brew "gsed"
 
 # Casks
 # cask "google-chrome"

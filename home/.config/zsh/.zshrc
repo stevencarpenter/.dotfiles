@@ -21,6 +21,10 @@ alias la='ls -lAh'
 alias ll='ls -lh'
 alias ls='ls -G'
 alias lsa='ls -lah'
+alias sed='gsed'
+
+# Lumin Aliases
+alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
 
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -A"
