@@ -1,0 +1,2 @@
+main/.config/zsh/.zprofile filter=cloudFlareApiKey
+main/.config/zsh/.zprofile filter=cloudFlareEmail

@@ -42,3 +42,6 @@ git clone git@github.com:stevencarpenter/.dotfiles.git ~/
 cd ~/.dotfiles
 stow -nvvv home
 ```
+
+## Setting up git filtering for secrets
+This is the best resource I found that I can understand https://willcarh.art/blog/a-case-for-git-filters
