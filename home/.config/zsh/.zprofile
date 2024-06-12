@@ -17,7 +17,6 @@ export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
 export CLOUDFLARE_API_KEY="SMUDGED_CLOUDFLARE_API_KEY"
 export CLOUDFLARE_EMAIL="SMUDGED_CLOUDFLARE_EMAIL"
 
-
 profile_dir="${ZDOTDIR}/profile.d"
 if [[ -d "$profile_dir" && -n "$(ls -A $profile_dir)" ]]; then
     for file in $profile_dir/*; do

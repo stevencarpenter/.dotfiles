@@ -24,8 +24,7 @@ alias lsa='ls -lah'
 alias sed='gsed'
 
 # Lumin Aliases
-alias vault-login='VAULT_ADDR=https://vault-prod.a3-digital.internal:443 vault login -method=oidc'
-
+alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
 
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -A"
