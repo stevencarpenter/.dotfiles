@@ -1,0 +1,27 @@
+name: master
+
+on: [ push, pull_request ]
+
+jobs:
+  master:
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
+        poetry-version: [ "1.8.3" ]
+        os: [ ubuntu-22.04 ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: "poetry"
+      - name: Python Poetry Action
+        uses: abatilo/actions-poetry@v3.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+          python-version: ${{ matrix.python }}
+          command: install

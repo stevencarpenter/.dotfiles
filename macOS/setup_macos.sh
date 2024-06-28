@@ -1,13 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Install Brewfile contents and make sure things are chyll (with a y)
 brew bundle --file=~/.dotfiles/macOS/Brewfile
 brew bundle check --verbose
 brew doctor
-
-# Make executable and run the script to setup the /etc/zsh/zshenv
-chmod +x ~/.dotfiles/scripts/populate_home_zshenv.sh
-sudo bash ~/.dotfiles/scripts/populate_home_zshenv.sh
 
 # Run stow to link dotfiles
 cd ~/.dotfiles/ || exit

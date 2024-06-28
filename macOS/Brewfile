@@ -56,6 +56,10 @@ brew "pre-commit"
 brew "mise"
 brew "mysql"
 brew "gsed"
+brew "bat"
+brew "direnv"
+brew "yazi"
+brew "aws-sso-cli"
 
 # Casks
 # cask "google-chrome"
@@ -79,7 +83,6 @@ cask "obsidian"
 cask "onyx"
 
 # terminal emulators
-cask "wezterm"
 cask "iterm2"
 
 # MAIN FONTS (https://fonts.google.com/)

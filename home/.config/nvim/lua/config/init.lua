@@ -64,7 +64,7 @@ require("lazy").setup({
 })
 
 -- Activate the onedark theme after the plugins are loaded.
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme rose-pine-main")
 
 local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
 
