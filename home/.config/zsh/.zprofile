@@ -21,7 +21,7 @@ export NPM_TOKEN="SMUDGED_NPM_TOKEN"
 ## my zsh functions
 
 # Get assumed role credentials for AWS
-# eg: get_assumed_role_credentials dev arn:aws:iam::674367326418:role/sre-test-one-poc_s3_export sre-test-s3-poc
+# eg: get_assumed_role_credentials arn:aws:iam::666666666666:role/my-dope-role my-session-name
 function get_assumed_role_credentials {
     if [ $# -lt 2 ]; then
         echo "Usage: $get_assumed_role_credentials[1] <arn> <session-name>"
