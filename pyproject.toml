@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dotfiles"
+version = "0.1.0"
+description = "My dotfiles"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "dotfiles"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pre-commit = "^3.7.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

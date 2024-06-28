@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 # ----------------------------------------------------------------------
 # Zsh Profile Configuration:
 # ----------------------------------------------------------------------
@@ -7,8 +6,8 @@
 # that should be executed at login.
 # ----------------------------------------------------------------------
 
-# The following have to go in .zprofile, because they are used by 
-# macOS's /etc/zshrc file, which is sourced _before_ your`.zshrc` 
+# The following have to go in .zprofile, because they are used by
+# macOS's /etc/zshrc file, which is sourced _before_ your`.zshrc`
 # file.
 export SHELL_SESSION_DIR=$XDG_STATE_HOME/zsh/sessions
 export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
@@ -16,6 +15,37 @@ export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
 # Cloudflare Secrets Lumin
 export CLOUDFLARE_API_KEY="SMUDGED_CLOUDFLARE_API_KEY"
 export CLOUDFLARE_EMAIL="SMUDGED_CLOUDFLARE_EMAIL"
+
+export NPM_TOKEN="SMUDGED_NPM_TOKEN"
+
+## my zsh functions
+
+# Get assumed role credentials for AWS
+# eg: get_assumed_role_credentials dev arn:aws:iam::674367326418:role/sre-test-one-poc_s3_export sre-test-s3-poc
+function get_assumed_role_credentials {
+    if [ $# -lt 2 ]; then
+        echo "Usage: $get_assumed_role_credentials[1] <arn> <session-name>"
+        echo "You must already have credentials in your environment for the account you are assuming a role in."
+        echo "Use aws-sso-profile, or asp if you are using my aliases, and select the role for the account via the autocompletion mechanism."
+        return
+    fi
+
+    export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s" \
+    $(aws sts assume-role \
+    --role-arn $1 \
+    --role-session-name $2 \
+    --query "Credentials.[AccessKeyId,SecretAccessKey,SessionToken]" \
+    --output text))
+}
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 profile_dir="${ZDOTDIR}/profile.d"
 if [[ -d "$profile_dir" && -n "$(ls -A $profile_dir)" ]]; then
