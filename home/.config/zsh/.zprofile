@@ -54,4 +54,7 @@ if [[ -d "$profile_dir" && -n "$(ls -A $profile_dir)" ]]; then
     done
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ $(uname) == "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
