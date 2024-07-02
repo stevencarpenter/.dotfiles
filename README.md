@@ -45,3 +45,8 @@ stow -nvvv home
 
 ## Setting up git filtering for secrets
 This is the best resource I found that I can understand https://willcarh.art/blog/a-case-for-git-filters
+
+## NVIM Configuration and Plugins
+This is very much a work in progress as I feel out what I like and need. I am not writing much code in vim directly, this is  more for editing configs and such. Maybe I will become a convert, who knows.
+
+99% of the credit for this goes to https://github.com/typecraft-dev/dotfiles/tree/master/nvim/.config/nvim (thanks nerd!)
