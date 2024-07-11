@@ -23,6 +23,7 @@ alias ls='ls -G'
 alias lsa='ls -lah'
 alias sed='gsed'
 alias asp='aws-sso-profile'
+alias k='kubectl'
 
 # Lumin Aliases
 alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
