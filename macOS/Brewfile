@@ -60,6 +60,7 @@ brew "bat"
 brew "direnv"
 brew "yazi"
 brew "aws-sso-cli"
+brew "conftest"
 
 # Casks
 # cask "google-chrome"

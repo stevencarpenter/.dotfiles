@@ -4,6 +4,10 @@
 #
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
+## Zshell profiling flags
+# zprof
+# zmodload zsh/zprof
+
 # aliases
 # Note: Enclosing the value in single quotation marks (') will not expand any variables used with the command.
 # To expand the variables, use double quotation marks (").
@@ -24,6 +28,7 @@ alias lsa='ls -lah'
 alias sed='gsed'
 alias asp='aws-sso-profile'
 alias k='kubectl'
+alias adl="asp SMUDGED_AWS_ACCOUNT_ID_DEV:SRE-a3dev && aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
 
 # Lumin Aliases
 alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
@@ -190,3 +195,6 @@ test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2
 
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
+
+## Zshell profiling flags
+# zprof
