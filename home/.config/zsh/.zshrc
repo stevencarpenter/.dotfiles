@@ -4,6 +4,15 @@
 #
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
+## Zshell profiling flags
+# zprof
+# zmodload zsh/zprof
+
+# Autoload functions.
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
+autoload -Uz zmv
+
 # aliases
 # Note: Enclosing the value in single quotation marks (') will not expand any variables used with the command.
 # To expand the variables, use double quotation marks (").
@@ -24,6 +33,7 @@ alias lsa='ls -lah'
 alias sed='gsed'
 alias asp='aws-sso-profile'
 alias k='kubectl'
+alias adl="asp SMUDGED_AWS_ACCOUNT_ID_DEV:SRE-a3dev && aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
 
 # Lumin Aliases
 alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
@@ -163,11 +173,6 @@ compdef __aws_sso_profile_complete aws-sso-profile
 complete -C /opt/homebrew/bin/aws-sso aws-sso
 # END_AWS_SSO_CLI
 
-# Autoload functions.
-autoload -Uz +X compinit && compinit
-autoload -Uz +X bashcompinit && bashcompinit
-autoload -Uz zmv
-
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
@@ -180,13 +185,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
-setopt glob_dots     # no special treatment for file names with a leading dot
-setopt no_auto_menu  # require an extra TAB press to open the completion menu
-
-
-
-test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
-
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
+
+## Zshell profiling flags
+# zprof
+
+. "$HOME/.local/share/../bin/env"
