@@ -190,3 +190,5 @@ eval "$(~/.local/bin/mise activate zsh)"
 
 ## Zshell profiling flags
 # zprof
+
+. "$HOME/.local/share/../bin/env"

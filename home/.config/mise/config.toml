@@ -1,4 +1,4 @@
 [tools]
-kubectl = "1.28"
+kubectl = "1.32"
 java = "17"
 node = "18.19.1"
