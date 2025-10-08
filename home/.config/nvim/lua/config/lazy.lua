@@ -16,8 +16,25 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
+    -- ensure mason plugins are available and loaded before LazyVim
+    { "mason-org/mason.nvim", lazy = false },
+    { "mason-org/mason-lspconfig.nvim", lazy = false },
+
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      -- ensure mason packages are available *before* LazyVim's LSP module runs
+      dependencies = {
+        { "mason-org/mason.nvim", lazy = false },
+        { "mason-org/mason-lspconfig.nvim", lazy = false },
+      },
+      -- keep deps minimal here since mason entries are explicit above
+    },
+
+    -- import LazyVim extras
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
     -- import/override with your plugins
     { import = "plugins" },
   },
