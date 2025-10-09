@@ -1,4 +1,7 @@
 [tools]
 kubectl = "1.32"
 java = "17"
-node = "18.19.1"
+node = "latest"
+gradle = "8.14.3"
+sbt = "1.10.1"
+terraform = "1.10.4"

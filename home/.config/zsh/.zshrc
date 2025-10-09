@@ -33,7 +33,8 @@ alias lsa='ls -lah'
 alias sed='gsed'
 alias asp='aws-sso-profile'
 alias k='kubectl'
-alias adl="asp SMUDGED_AWS_ACCOUNT_ID_DEV:SRE-a3dev && aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
+alias s='stevectl'
+alias adl="aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
 
 # Lumin Aliases
 alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
@@ -187,8 +188,13 @@ eval "$(pyenv init -)"
 
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
-
-## Zshell profiling flags
-# zprof
+fpath+=$(brew --prefix)/share/zsh/site-function
 
 . "$HOME/.local/share/../bin/env"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
+# Zshell profiling flags
+# zprof
