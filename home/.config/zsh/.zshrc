@@ -35,8 +35,6 @@ alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
 alias adl="aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
-
-# Lumin Aliases
 alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
 alias vault-logout='VAULT_ADDR=SMUDGED_VAULT_HOST vault logout'
 
