@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# Ensure XDG paths resolve even when running before dotfiles configure them
+if [[ -z ${XDG_CONFIG_HOME:-} ]]; then
+  XDG_CONFIG_HOME="$HOME/.config"
+fi
+
 # Install atuin
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
