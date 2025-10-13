@@ -15,6 +15,7 @@ The following mappings are sourced from `lua/lazyvim/config/keymaps.lua` in the 
 
 | Modes | Keys | Action | Notes |
 | --- | --- | --- | --- |
+| Normal | ' ' (space) | **LEADER** | The nvim leader key referenced as <leader> below. |
 | Normal/Visual | `j`, `<Down>` | Move cursor down, respecting wrapped lines when no count is given. | Wrap-aware vertical motion. |
 | Normal/Visual | `k`, `<Up>` | Move cursor up, respecting wrapped lines when no count is given. | Wrap-aware vertical motion. |
 | Normal | `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` | Focus the left, lower, upper, or right window. | Remaps the standard window movement keys. |
