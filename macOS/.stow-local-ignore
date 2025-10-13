@@ -29,4 +29,3 @@ _darcs
 # Specific to macOS
 \.stow-local-ignore
 setup_macos.sh
-
