@@ -1,17 +1,25 @@
 # Neovim Hotkey Reference
 
-This guide compiles the effective keymaps applied by the LazyVim-based Neovim configuration included in these dotfiles. It captures:
+This single, consolidated reference lists local keymap changes (added or overridden mappings) at the top so you can quickly see what differs from LazyVim's defaults. A summarized reference of the LazyVim defaults follows for quick lookup.
 
-* Core mappings shipped with LazyVim that are active without any plugin-specific context.
-* Plugin bindings contributed by the built-in LazyVim plugin specs that are enabled by default.
-* Additional shortcuts added by the optional LazyVim extras enabled in `lazyvim.json`.
-* Local overrides from the user-defined plugin specifications in `home/.config/nvim/lua/plugins`.
+Notes:
+- Local mappings and overrides live under `home/.config/nvim/lua/plugins` in this repo.
+- The full upstream LazyVim source contains the canonical defaults; this document summarizes those defaults so you don't need snapshot copies in this repo.
 
-> **Note:** All upstream mappings cited below are snapshot copies pulled from the LazyVim repository so the documented bindings remain stable even if upstream changes in the future.
+## Local overrides & additions (modified from default)
 
-## Core LazyVim Keymaps
+The table below lists mappings that were added or that intentionally change LazyVim's defaults. If a mapping in your local config re-declares a default but does not change its behaviour, it is not listed here.
 
-The following mappings are sourced from `lua/lazyvim/config/keymaps.lua` in the LazyVim distribution.【F:docs/references/lazyvim/config/keymaps.lua†L1-L205】 Unless noted otherwise, they apply globally.
+| Mode | Keys | Action | Diff from default | Location |
+| --- | --- | --- | --- | --- |
+| Normal | `<leader>cl` | Toggle Trouble LSP view (`:Trouble lsp toggle focus=false win.position=right`) | Overrides LazyVim's default `<leader>cl` (opens LSP info / Snacks LSP picker). |
+| Normal | `<leader>fp` | Find plugin files via Telescope — uses `require('lazy.core.config').options.root` as the cwd. | New mapping (not present in LazyVim defaults). |
+
+Note: The local `example.lua` spec also re-declares several Trouble bindings (e.g. `<leader>xx`, `<leader>xX`, `<leader>cs`, `<leader>xL`, `<leader>xQ`). Those are intentionally kept to ensure Trouble is used for those actions but they are identical to LazyVim defaults, so they are not included above.
+
+## Defaults (summarized)
+
+The remainder of this document summarizes the default keymaps provided by the LazyVim starter configuration and commonly used extras. Use this as a reference — the full upstream source is available from the LazyVim project.
 
 | Modes | Keys | Action | Notes |
 | --- | --- | --- | --- |
@@ -91,7 +99,7 @@ These bindings come from LazyVim's default plugin specifications that ship with 
 
 ### Grug Far (multi-file search)
 
-Keymaps defined in `lazyvim/plugins/editor.lua` launch search-and-replace workflows.【F:docs/references/lazyvim/plugins/editor.lua†L4-L27】
+Keymaps defined in `lazyvim/plugins/editor.lua` launch search-and-replace workflows.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -99,7 +107,7 @@ Keymaps defined in `lazyvim/plugins/editor.lua` launch search-and-replace workfl
 
 ### Flash (enhanced jump/search)
 
-LazyVim wires Flash for rapid navigation across multiple modes.【F:docs/references/lazyvim/plugins/editor.lua†L29-L56】
+LazyVim wires Flash for rapid navigation across multiple modes.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -112,7 +120,7 @@ LazyVim wires Flash for rapid navigation across multiple modes.【F:docs/referen
 
 ### which-key (keymap discovery)
 
-which-key adds helper chords for revealing mappings.【F:docs/references/lazyvim/plugins/editor.lua†L58-L115】
+which-key adds helper chords for revealing mappings.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -121,7 +129,7 @@ which-key adds helper chords for revealing mappings.【F:docs/references/lazyvim
 
 ### Snacks Toolkit (utility helpers)
 
-The Snacks utility plugin exposes scratch buffers, profiler tools, and terminal navigation aids.【F:docs/references/lazyvim/plugins/util.lua†L13-L44】
+The Snacks utility plugin exposes scratch buffers, profiler tools, and terminal navigation aids.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -133,7 +141,7 @@ The Snacks utility plugin exposes scratch buffers, profiler tools, and terminal 
 
 ### Session Persistence
 
-Persistence adds session management shortcuts.【F:docs/references/lazyvim/plugins/util.lua†L32-L46】
+Persistence adds session management shortcuts.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -144,7 +152,7 @@ Persistence adds session management shortcuts.【F:docs/references/lazyvim/plugi
 
 ### Bufferline (tab-like buffers)
 
-Bufferline introduces additional buffer navigation and management commands.【F:docs/references/lazyvim/plugins/ui.lua†L1-L38】
+Bufferline introduces additional buffer navigation and management commands.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -157,7 +165,7 @@ Bufferline introduces additional buffer navigation and management commands.【F:
 
 ### Noice (UI enhancements)
 
-Noice remaps several UI-focused commands, including message history access and scrollback in floating LSP popups.【F:docs/references/lazyvim/plugins/ui.lua†L200-L244】
+Noice remaps several UI-focused commands, including message history access and scrollback in floating LSP popups.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -168,7 +176,7 @@ Noice remaps several UI-focused commands, including message history access and s
 
 ### Snacks Notifications & Dashboard
 
-Snacks' UI module adds shortcuts for viewing notification history and clearing alerts.【F:docs/references/lazyvim/plugins/ui.lua†L246-L308】
+Snacks' UI module adds shortcuts for viewing notification history and clearing alerts.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -178,7 +186,7 @@ Snacks' UI module adds shortcuts for viewing notification history and clearing a
 
 ### Gitsigns
 
-LazyVim configures Gitsigns with a rich set of buffer-local mappings when a Git buffer attaches.【F:docs/references/lazyvim/plugins/editor.lua†L71-L141】
+LazyVim configures Gitsigns with a rich set of buffer-local mappings when a Git buffer attaches.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -194,7 +202,7 @@ LazyVim configures Gitsigns with a rich set of buffer-local mappings when a Git 
 
 ### Trouble (diagnostics list)
 
-Trouble binds quick toggles for diagnostics, symbols, and list navigation.【F:docs/references/lazyvim/plugins/editor.lua†L143-L198】
+Trouble binds quick toggles for diagnostics, symbols, and list navigation.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -205,7 +213,7 @@ Trouble binds quick toggles for diagnostics, symbols, and list navigation.【F:d
 
 ### todo-comments
 
-todo-comments adds project-wide TODO management commands.【F:docs/references/lazyvim/plugins/editor.lua†L200-L231】
+todo-comments adds project-wide TODO management commands.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -215,7 +223,7 @@ todo-comments adds project-wide TODO management commands.【F:docs/references/la
 
 ### Conform (formatters)
 
-Conform adds a dedicated shortcut for formatting injected code blocks separately.【F:docs/references/lazyvim/plugins/formatting.lua†L19-L33】
+Conform adds a dedicated shortcut for formatting injected code blocks separately.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -223,7 +231,7 @@ Conform adds a dedicated shortcut for formatting injected code blocks separately
 
 ### Treesitter Textobjects
 
-Motion keys for Treesitter textobjects support jumping between functions, classes, and parameters.【F:docs/references/lazyvim/plugins/treesitter.lua†L140-L187】
+Motion keys for Treesitter textobjects support jumping between functions, classes, and parameters.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -236,7 +244,7 @@ Motion keys for Treesitter textobjects support jumping between functions, classe
 
 ### LSP Core Mappings
 
-These LSP-centric bindings come from LazyVim's `lsp/keymaps.lua`, and they attach buffer-locally when a server connects.【F:docs/references/lazyvim/plugins/lsp/keymaps.lua†L15-L43】
+These LSP-centric bindings attach buffer-locally when a server connects. The mappings below are available when an LSP attaches and the server reports capability support for the respective actions.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -257,7 +265,7 @@ The optional extras enabled in `home/.config/nvim/lazyvim.json` contribute the f
 
 ### Copilot Chat
 
-Copilot Chat adds AI-assisted commands under the `<leader>a` prefix and remaps `<C-s>` inside the chat buffer.【F:docs/references/lazyvim/plugins/extras/ai/copilot-chat.lua†L1-L60】
+Copilot Chat adds AI-assisted commands under the `<leader>a` prefix and remaps `<C-s>` inside the chat buffer.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -269,7 +277,7 @@ Copilot Chat adds AI-assisted commands under the `<leader>a` prefix and remaps `
 
 ### Yanky
 
-Yanky replaces the default yank/paste motions with a history-aware implementation.【F:docs/references/lazyvim/plugins/extras/coding/yanky.lua†L1-L38】
+Yanky replaces the default yank/paste motions with a history-aware implementation.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -284,7 +292,7 @@ Yanky replaces the default yank/paste motions with a history-aware implementatio
 
 ### Dial
 
-Dial enables smart increment/decrement operations across data types.【F:docs/references/lazyvim/plugins/extras/editor/dial.lua†L13-L26】
+Dial enables smart increment/decrement operations across data types.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -293,7 +301,7 @@ Dial enables smart increment/decrement operations across data types.【F:docs/re
 
 ### Harpoon 2
 
-Harpoon bookmarks files and jumps between them quickly.【F:docs/references/lazyvim/plugins/extras/editor/harpoon2.lua†L1-L32】
+Harpoon bookmarks files and jumps between them quickly.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -303,7 +311,7 @@ Harpoon bookmarks files and jumps between them quickly.【F:docs/references/lazy
 
 ### Incremental Rename
 
-inc-rename augments the LSP rename workflow with a preview-capable command.【F:docs/references/lazyvim/plugins/extras/editor/inc-rename.lua†L1-L32】
+inc-rename augments the LSP rename workflow with a preview-capable command.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -311,7 +319,7 @@ inc-rename augments the LSP rename workflow with a preview-capable command.【F:
 
 ### Markdown Enhancements
 
-Markdown extras add preview and rendering toggles.【F:docs/references/lazyvim/plugins/extras/lang/markdown.lua†L16-L52】
+Markdown extras add preview and rendering toggles.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -320,7 +328,7 @@ Markdown extras add preview and rendering toggles.【F:docs/references/lazyvim/p
 
 ### Python Tooling
 
-Python-specific servers and tooling expose additional actions.【F:docs/references/lazyvim/plugins/extras/lang/python.lua†L40-L112】
+Python-specific servers and tooling expose additional actions.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -330,7 +338,7 @@ Python-specific servers and tooling expose additional actions.【F:docs/referenc
 
 ### Scala Metals
 
-Metals integrations add Telescope and Metals-specific commands.【F:docs/references/lazyvim/plugins/extras/lang/scala.lua†L20-L44】
+Metals integrations add Telescope and Metals-specific commands.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -340,7 +348,7 @@ Metals integrations add Telescope and Metals-specific commands.【F:docs/referen
 
 ### SQL / Database UI
 
-The SQL extra enables Dadbod UI toggles.【F:docs/references/lazyvim/plugins/extras/lang/sql.lua†L72-L98】
+The SQL extra enables Dadbod UI toggles.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -348,7 +356,7 @@ The SQL extra enables Dadbod UI toggles.【F:docs/references/lazyvim/plugins/ext
 
 ### Testing (neotest core)
 
-neotest provides a cohesive test runner experience with DAP integration.【F:docs/references/lazyvim/plugins/extras/test/core.lua†L100-L129】
+neotest provides a cohesive test runner experience with DAP integration.
 
 | Modes | Keys | Action |
 | --- | --- | --- |
@@ -358,32 +366,9 @@ neotest provides a cohesive test runner experience with DAP integration.【F:doc
 | Normal | `<leader>tS` / `<leader>tw` | Stop the active test run or toggle watching the current file. |
 | Normal | `<leader>td` | Debug the nearest test via DAP. |
 
-## Local Plugin Overrides
+## Local plugin specs
 
-Finally, the dotfiles include custom plugin specs under `home/.config/nvim/lua/plugins` that layer additional keymaps on top of the LazyVim defaults.
+Local plugin specs continue to live under `home/.config/nvim/lua/plugins`. See that directory for the exact code that applies these overrides and additions.
 
-### Trouble refinements
-
-The local Trouble spec keeps the LazyVim defaults while also mapping `<leader>cl` to reopen the LSP Trouble view.【F:home/.config/nvim/lua/plugins/example.lua†L24-L57】
-
-> This shadow-binds the LSP configuration shortcut documented above, so `<leader>cl` opens Trouble instead of the Snacks LSP picker.
-
-| Modes | Keys | Action |
-| --- | --- | --- |
-| Normal | `<leader>xx` / `<leader>xX` | Toggle project or buffer diagnostics in Trouble. |
-| Normal | `<leader>cs` | Toggle the Trouble symbols view. |
-| Normal | `<leader>cl` | Toggle the LSP definitions/references Trouble view docked on the right. |
-| Normal | `<leader>xL` / `<leader>xQ` | Toggle the location list or quickfix list in Trouble. |
-
-### Telescope plugin browser
-
-A local Telescope keymap browses Lazy-managed plugin files.【F:home/.config/nvim/lua/plugins/example.lua†L69-L90】
-
-| Modes | Keys | Action |
-| --- | --- | --- |
-| Normal | `<leader>fp` | Search plugin files within the Lazy installation directory. |
-
-### Snacks Terminal Toggle Reminder
-
-Although Snacks defines terminal hide keys globally, the local plugin spec adds no extra terminal bindings beyond the defaults shown above.
+If you want to add or change mappings, edit the plugin specs in that directory; the short list of local modifications is shown at the top of this document for quick reference.
 
