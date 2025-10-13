@@ -4,7 +4,7 @@ This document summarizes the effective keymaps defined by the dotfiles for inter
 
 ## Zsh (zsh4humans)
 
-* Keyboard layout is explicitly set to the mac profile so the bindings below follow macOS-oriented modifier naming (for example, Option is treated as `Alt`).【F:home/.config/zsh/.zshrc†L51-L65】
+* Keyboard layout is explicitly set to the mac profile so the bindings below follow macOS-oriented modifier naming (for example, Option is treated as `Alt`). [See .zshrc lines 51-65](../home/.config/zsh/.zshrc#L51-L65)
 * The right-arrow key accepts the entire autosuggestion instead of a single character, thanks to `forward-char` being set to `accept`.【F:home/.config/zsh/.zshrc†L63-L65】
 
 ### Custom key bindings
