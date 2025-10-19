@@ -64,7 +64,8 @@ for _ksm_key _ksm_notation in ${(kv)_ksm_notations}; do
 
   typeset _ksm_value
   _ksm_value="$(ksm secret notation "$_ksm_notation" 2>/dev/null)"
-  if [[ $? -eq 0 && -n "$_ksm_value" ]]; then
+  _ksm_status=$?
+  if [[ $_ksm_status -eq 0 && -n "$_ksm_value" ]]; then
     export "${_ksm_key}=${_ksm_value}"
   else
     print -u2 "[keeper-secrets] Failed to resolve $_ksm_key from $_ksm_notation"
