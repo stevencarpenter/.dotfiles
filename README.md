@@ -43,8 +43,14 @@ cd ~/.dotfiles
 stow -nvvv home
 ```
 
-## Setting up git filtering for secrets
-This is the best resource I found that I can understand https://willcarh.art/blog/a-case-for-git-filters
+## Secrets management
+
+Secrets are no longer stored in the repository via Git filters. Runtime values
+are resolved by the Keeper Secrets Manager CLI during shell startup so that the
+environment stays in sync without committing sensitive data. Review
+[`docs/secrets-management.md`](docs/secrets-management.md) for setup
+instructions, usage tips, and guidance on integrating work secrets from
+HashiCorp Vault or 1Password.
 
 ## NVIM Configuration and Plugins
 This is very much a work in progress as I feel out what I like and need. I am not writing much code in vim directly, this is  more for editing configs and such. Maybe I will become a convert, who knows.

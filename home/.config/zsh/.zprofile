@@ -12,11 +12,9 @@
 export SHELL_SESSION_DIR=$XDG_STATE_HOME/zsh/sessions
 export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
 
-# Cloudflare Secrets
-export CLOUDFLARE_API_KEY="SMUDGED_CLOUDFLARE_API_KEY"
-export CLOUDFLARE_EMAIL="SMUDGED_CLOUDFLARE_EMAIL"
-
-export NPM_TOKEN="SMUDGED_NPM_TOKEN"
+# Keeper Secrets Manager driven secrets are exported via
+# $ZDOTDIR/profile.d/keeper-secrets.zsh so that credentials are resolved
+# dynamically at login time.
 
 ## my zsh functions
 
