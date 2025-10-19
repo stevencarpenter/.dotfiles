@@ -1,9 +1,23 @@
+# Tool versions pinned for reproducible CLI tooling.
 [tools]
-kubectl = "1.32"
-java = "17"
-node = "latest"
+# Kubernetes CLI
+kubectl = "1.32.9"
+
+# JVM toolchain
+java = "temurin-17.0.13+11"
+
+# JavaScript/TypeScript runtime
+node = "22.20.0"
+
+# Build tools
 gradle = "8.14.3"
-sbt = "1.10.1"
-terraform = "1.10.4"
-goreleaser = "latest"
-go = "1.24.7"
+sbt = "1.10.10"
+
+# Infrastructure as code
+terraform = "1.13.4"
+
+# Release tooling
+goreleaser = "2.5.1"
+
+# Go toolchain
+go = "1.24.6"
