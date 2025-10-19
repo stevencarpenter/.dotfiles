@@ -38,10 +38,8 @@ unset _notation_value
 typeset _ksm_map_file="${KSM_NOTATION_FILE:-$HOME/.config/ksm/env-map}"
 if [[ -r "$_ksm_map_file" ]]; then
   while IFS='=' read -r _ksm_key _ksm_notation; do
-    _ksm_key="${_ksm_key#${_ksm_key%%[![:space:]]*}}"
-    _ksm_key="${_ksm_key%${_ksm_key##*[![:space:]]}}"
-    _ksm_notation="${_ksm_notation#${_ksm_notation%%[![:space:]]*}}"
-    _ksm_notation="${_ksm_notation%${_ksm_notation##*[![:space:]]}}"
+    _ksm_key="${_ksm_key:|}"
+    _ksm_notation="${_ksm_notation:|}"
     [[ -z "$_ksm_key" ]] && continue
     [[ "$_ksm_key" == '#'* ]] && continue
     if [[ -n "$_ksm_notation" ]]; then
