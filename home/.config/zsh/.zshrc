@@ -176,13 +176,7 @@ complete -C /opt/homebrew/bin/aws-sso aws-sso
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
-eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
