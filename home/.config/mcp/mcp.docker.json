@@ -6,8 +6,10 @@
         "run",
         "-i",
         "--rm",
-        "-e", "TERRAFORM_MCP_INSTRUCTIONS_PATH=/etc/terraform-instructions",
-        "-v", "${HOME}/.config/mcp/terraform-instructions:/etc/terraform-instructions:ro",
+        "-e",
+        "MCP_RATE_LIMIT_GLOBAL=50:100",
+        "-e",
+        "MCP_RATE_LIMIT_SESSION=25:50",
         "hashicorp/terraform-mcp-server:latest"
       ]
     },
@@ -44,7 +46,11 @@
     },
     "aws-knowledge-mcp-server": {
       "command": "uvx",
-      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
+      "args": [
+        "fastmcp",
+        "run",
+        "https://knowledge-mcp.global.api.aws"
+      ]
     }
   }
 }
