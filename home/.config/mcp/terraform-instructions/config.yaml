@@ -1,0 +1,30 @@
+# MCP Terraform Instructions Configuration
+
+instructions:
+  - path: ./system-prompt.txt
+    type: system
+    description: "System prompts for Terraform assistance"
+    enabled: true
+
+  - path: ./best-practices.md
+    type: guidelines
+    description: "Terraform best practices and standards"
+    enabled: true
+
+# Environment Configuration
+environment:
+  terraform_version: "latest"
+  log_level: "INFO"
+  strict_mode: true
+
+# Custom Modules
+modules:
+  enabled: true
+  path: "./custom-modules"
+  description: "Custom Terraform modules specific to your infrastructure"
+
+# Compliance and Policy
+compliance:
+  enforce_standards: true
+  check_security: true
+  validate_best_practices: true
