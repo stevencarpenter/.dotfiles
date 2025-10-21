@@ -140,7 +140,7 @@ gh copilot suggest -t shell "compress all log files"
 **Interactive mode:**
 ```bash
 # Start interactive session
-?? 
+??
 
 # Then type your query
 # Copilot provides multiple suggestions

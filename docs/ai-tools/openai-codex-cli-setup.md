@@ -62,7 +62,7 @@ fi
 codex_query() {
     local prompt="$1"
     local system_msg="${2:-You are a helpful coding assistant.}"
-    
+
     curl -s https://api.openai.com/v1/chat/completions \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $OPENAI_API_KEY" \
@@ -140,12 +140,12 @@ MODEL = os.getenv('OPENAI_MODEL', 'gpt-4')
 def query_codex(prompt, system_message=None, temperature=0.7, max_tokens=2000):
     """Query OpenAI API"""
     messages = []
-    
+
     if system_message:
         messages.append({"role": "system", "content": system_message})
-    
+
     messages.append({"role": "user", "content": prompt})
-    
+
     try:
         response = client.chat.completions.create(
             model=MODEL,
@@ -166,10 +166,10 @@ def main():
     parser.add_argument('-m', '--model', default=MODEL, help='Model to use')
     parser.add_argument('-t', '--temperature', type=float, default=0.7,
                        help='Temperature (0.0-2.0)')
-    
+
     args = parser.parse_args()
     prompt = ' '.join(args.prompt)
-    
+
     system_messages = {
         'suggest': 'You are an expert programmer. Provide clear code suggestions.',
         'explain': 'You are a code explainer. Explain code clearly and concisely.',
@@ -179,7 +179,7 @@ def main():
         'doc': 'You are a technical writer. Write clear, helpful documentation.',
         'ask': 'You are a helpful coding assistant.'
     }
-    
+
     system_msg = system_messages.get(args.command)
     result = query_codex(prompt, system_msg, args.temperature)
     print(result)
@@ -238,7 +238,7 @@ async function queryCodex(prompt, systemMessage, temperature = 0.7) {
             temperature: temperature,
             max_tokens: 2000
         });
-        
+
         return response.choices[0].message.content;
     } catch (error) {
         console.error('Error:', error.message);
@@ -332,11 +332,11 @@ echo ""
 while true; do
     echo -n "codex> "
     read -r input
-    
+
     if [ "$input" = "exit" ]; then
         break
     fi
-    
+
     codex $input
     echo ""
 done
@@ -418,12 +418,12 @@ cxfile() {
     # Process entire file
     local file="$1"
     local command="${2:-explain}"
-    
+
     if [ ! -f "$file" ]; then
         echo "File not found: $file"
         return 1
     fi
-    
+
     codex "$command" "$(cat "$file")"
 }
 
@@ -600,19 +600,19 @@ curl https://api.openai.com/v1/models \
 codex() {
     local max_retries=3
     local retry_delay=5
-    
+
     for i in $(seq 1 $max_retries); do
         result=$(~/scripts/codex.sh "$@" 2>&1)
-        
+
         if [[ ! "$result" =~ "rate_limit" ]]; then
             echo "$result"
             return 0
         fi
-        
+
         echo "Rate limited, retrying in ${retry_delay}s..." >&2
         sleep $retry_delay
     done
-    
+
     echo "Failed after $max_retries attempts" >&2
     return 1
 }
@@ -685,14 +685,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Review with Codex
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           # Get diff and review
           git diff origin/main...HEAD > changes.diff
-          
+
           # Send to Codex for review
           curl -X POST https://api.openai.com/v1/chat/completions \
             -H "Authorization: Bearer $OPENAI_API_KEY" \

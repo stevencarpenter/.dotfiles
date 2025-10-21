@@ -14,7 +14,7 @@ When generating or modifying Terraform code, always follow these principles:
 ```hcl
 terraform {
   required_version = ">= 1.5.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -60,7 +60,7 @@ resource "aws_db_instance" "main_database" { }
 variable "environment" {
   description = "Environment name (dev, staging, prod)"
   type        = string
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment must be dev, staging, or prod."
@@ -108,7 +108,7 @@ output "bucket_arn" {
 resource "aws_instance" "web" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  
+
   tags = merge(
     var.common_tags,
     {
@@ -137,7 +137,7 @@ resource "aws_instance" "web" {
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
-  
+
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
@@ -163,9 +163,9 @@ locals {
     ManagedBy   = "Terraform"
     Project     = var.project_name
   }
-  
+
   bucket_name = "${var.project_name}-${var.environment}-data"
-  
+
   availability_zones = slice(
     data.aws_availability_zones.available.names,
     0,
@@ -184,7 +184,7 @@ resource "aws_s3_bucket" "data" {
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
   bucket = aws_s3_bucket.data.id
-  
+
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm     = "aws:kms"
@@ -198,7 +198,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
 ```hcl
 resource "aws_s3_bucket_public_access_block" "data" {
   bucket = aws_s3_bucket.data.id
-  
+
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
@@ -211,7 +211,7 @@ resource "aws_s3_bucket_public_access_block" "data" {
 resource "aws_security_group" "web" {
   name_prefix = "${var.project_name}-web-"
   vpc_id      = var.vpc_id
-  
+
   ingress {
     description = "HTTPS from load balancer"
     from_port   = 443
@@ -219,7 +219,7 @@ resource "aws_security_group" "web" {
     protocol    = "tcp"
     security_groups = [aws_security_group.alb.id]
   }
-  
+
   egress {
     description = "Allow all outbound"
     from_port   = 0
@@ -227,7 +227,7 @@ resource "aws_security_group" "web" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-web-sg"
   })
@@ -255,23 +255,23 @@ modules/
 ```hcl
 module "vpc" {
   source = "./modules/vpc"
-  
+
   vpc_cidr           = var.vpc_cidr
   availability_zones = var.availability_zones
   environment        = var.environment
-  
+
   tags = local.common_tags
 }
 
 module "s3_bucket" {
   source = "./modules/s3-bucket"
-  
+
   bucket_name = local.bucket_name
   environment = var.environment
-  
+
   enable_encryption = true
   kms_key_arn      = aws_kms_key.bucket.arn
-  
+
   tags = local.common_tags
 }
 ```
@@ -298,12 +298,12 @@ resource "aws_dynamodb_table" "terraform_locks" {
   name         = "terraform-locks"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
-  
+
   attribute {
     name = "LockID"
     type = "S"
   }
-  
+
   tags = {
     Name      = "Terraform State Lock Table"
     ManagedBy = "Terraform"
@@ -318,7 +318,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  
+
   lifecycle {
     create_before_destroy = true
     prevent_destroy       = true
@@ -335,7 +335,7 @@ variable "instance_type" {
   description = "EC2 instance type"
   type        = string
   default     = "t3.micro"
-  
+
   validation {
     condition = contains([
       "t3.micro", "t3.small", "t3.medium",
@@ -357,7 +357,7 @@ resource "aws_s3_bucket" "data" {
 resource "aws_s3_bucket_policy" "data" {
   bucket = aws_s3_bucket.data.id
   policy = data.aws_iam_policy_document.bucket_policy.json
-  
+
   depends_on = [
     aws_s3_bucket_public_access_block.data
   ]
@@ -373,13 +373,13 @@ resource "aws_s3_bucket_policy" "data" {
 locals {
   # Total number of AZs to use (max 3)
   az_count = min(length(data.aws_availability_zones.available.names), 3)
-  
+
   # CIDR blocks for public subnets (first half of range)
   public_subnet_cidrs = [
     for i in range(local.az_count) :
     cidrsubnet(var.vpc_cidr, 4, i)
   ]
-  
+
   # CIDR blocks for private subnets (second half of range)
   private_subnet_cidrs = [
     for i in range(local.az_count) :
@@ -488,15 +488,15 @@ When working with Terraform:
 ```hcl
 module "vpc" {
   source = "./modules/vpc"
-  
+
   vpc_cidr             = var.vpc_cidr
   availability_zones   = var.availability_zones
   public_subnet_cidrs  = var.public_subnet_cidrs
   private_subnet_cidrs = var.private_subnet_cidrs
-  
+
   enable_nat_gateway = true
   single_nat_gateway = var.environment != "prod"
-  
+
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-vpc"
   })
@@ -512,14 +512,14 @@ resource "aws_lb" "main" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
   subnets            = var.public_subnet_ids
-  
+
   enable_deletion_protection = var.environment == "prod"
-  
+
   access_logs {
     bucket  = aws_s3_bucket.logs.id
     enabled = true
   }
-  
+
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-alb"
   })
@@ -535,27 +535,27 @@ resource "aws_db_instance" "main" {
   engine_version    = "15.3"
   instance_class    = var.db_instance_class
   allocated_storage = var.db_allocated_storage
-  
+
   db_name  = var.db_name
   username = var.db_username
   password = var.db_password  # Use AWS Secrets Manager in production
-  
+
   vpc_security_group_ids = [aws_security_group.database.id]
   db_subnet_group_name   = aws_db_subnet_group.main.name
-  
+
   backup_retention_period = var.environment == "prod" ? 30 : 7
   backup_window          = "03:00-04:00"
   maintenance_window     = "sun:04:00-sun:05:00"
-  
+
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
-  
+
   storage_encrypted = true
   kms_key_id       = aws_kms_key.database.arn
-  
+
   deletion_protection = var.environment == "prod"
   skip_final_snapshot = var.environment != "prod"
   final_snapshot_identifier = var.environment == "prod" ? "${var.project_name}-final-snapshot" : null
-  
+
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-database"
   })
@@ -571,21 +571,21 @@ resource "aws_ecs_service" "app" {
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.desired_count
   launch_type     = "FARGATE"
-  
+
   network_configuration {
     subnets          = var.private_subnet_ids
     security_groups  = [aws_security_group.app.id]
     assign_public_ip = false
   }
-  
+
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
     container_name   = "app"
     container_port   = var.container_port
   }
-  
+
   depends_on = [aws_lb_listener.app]
-  
+
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-ecs-service"
   })
