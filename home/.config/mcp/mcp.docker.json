@@ -1,0 +1,50 @@
+{
+  "servers": {
+    "terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e", "TERRAFORM_MCP_INSTRUCTIONS_PATH=/etc/terraform-instructions",
+        "-v", "${HOME}/.config/mcp/terraform-instructions:/etc/terraform-instructions:ro",
+        "hashicorp/terraform-mcp-server:latest"
+      ]
+    },
+    "memory": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "-v",
+        "claude-memory:/app/dist",
+        "--rm",
+        "mcp/memory"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "mcp/sequentialthinking"
+      ]
+    },
+    "git": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v",
+        "${PWD}:/workspace",
+        "mcp/git"
+      ]
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "uvx",
+      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"]
+    }
+  }
+}
