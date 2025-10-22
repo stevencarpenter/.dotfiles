@@ -231,7 +231,7 @@ OPENAI_CONFIG_HOME=~/.config
 
 ## Documentation References
 
-- [Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)
+- [Terraform MCP Server](https://github.com/modelcontextprotocol/servers/blob/main/src/terraform/README.md)
 - [MCP Memory Server](https://github.com/modelcontextprotocol/servers)
 - [MCP Sequential Thinking](https://github.com/modelcontextprotocol/servers/blob/main/src/sequentialthinking/README.md)
 - [MCP Git Server](https://github.com/modelcontextprotocol/servers/blob/main/src/git/README.md)
