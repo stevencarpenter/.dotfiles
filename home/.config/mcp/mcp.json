@@ -1,0 +1,42 @@
+{
+  "servers": {
+    "terraform": {
+      "command": "terraform-mcp-server",
+      "args": [],
+      "env": {
+        "MCP_RATE_LIMIT_GLOBAL": "50:100",
+        "MCP_RATE_LIMIT_SESSION": "25:50",
+        "ENABLE_TF_OPERATIONS": true,
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "git": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ]
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "fastmcp",
+        "run",
+        "https://knowledge-mcp.global.api.aws"
+      ]
+    }
+  }
+}
