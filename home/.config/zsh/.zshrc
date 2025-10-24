@@ -35,9 +35,6 @@ alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
 alias adl="aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
-alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
-alias vault-logout='VAULT_ADDR=SMUDGED_VAULT_HOST vault logout'
-
 
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -A"
@@ -172,12 +169,15 @@ compdef __aws_sso_profile_complete aws-sso-profile
 complete -C /opt/homebrew/bin/aws-sso aws-sso
 # END_AWS_SSO_CLI
 
+
+
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
-eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
+
+export NPM_TOKEN="op://Employee/NPM/npm_token"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -193,6 +193,9 @@ fpath+=$(brew --prefix)/share/zsh/site-function
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
 
 # Zshell profiling flags
 # zprof

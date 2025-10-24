@@ -1,10 +1,47 @@
 [tools]
-kubectl = "1.32"
-java = "17"
-node = "latest"
-gradle = "8.14.3"
-sbt = "1.10.1"
-terraform = "1.10.4"
-goreleaser = "latest"
+# Programming Languages & Runtimes
 go = "1.24.7"
+java = "24"
+node = "latest"
+rust = "1.90.0"
+scala = "2.12"
+
+# Build Tools and Package Managers
+cargo = "latest"
+gradle = "8"
+maven = "latest"
+npm = "10"
+pipx = "latest"
+sbt = "latest"
+uv = "latest"
+
+# Infrastructure Tools
+gh = "latest"
+goreleaser = "latest"
+helm = "latest"
+jj = "latest"
+k9s = "latest"
+kubectl = "1.32"
+kustomize = "latest"
+lazydocker = "latest"
+lazygit = "latest"
+opencode = "latest"
 teleport-ent = "16"
+terraform = "1.10.4"
+tfenv = "latest"
+
+# Linters & Formatters
+golangci-lint = "latest"
+pre-commit = "latest"
+terraform-docs = "latest"
+tflint = "latest"
+trivy = "latest"
+yamllint = "latest"
+
+# Databases
+mysql = "8"
+
+# AI Tools
+awscli = "latest"
+claude = "latest"
+codex = "latest"
