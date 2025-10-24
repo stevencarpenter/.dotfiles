@@ -182,6 +182,8 @@ compdef _directories md
 eval "$(zoxide init --cmd cd zsh)"
 
 export NPM_TOKEN="op://Employee/NPM/npm_token"
+export CONTEXT7_API_KEY="op://Employee/context7/context7_token"
+export OPENAI_API_KEY="op://Employee/OpenAI/api_key"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"

@@ -1,12 +1,70 @@
 {
   "servers": {
-    "terraform": {
-      "command": "terraform-mcp-server",
-      "args": [],
-      "env": {
-        "MCP_RATE_LIMIT_GLOBAL": "50:100",
-        "MCP_RATE_LIMIT_SESSION": "25:50",
-        "ENABLE_TF_OPERATIONS": true,
+    "hashicorp/terraform-mcp-server": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MCP_RATE_LIMIT_GLOBAL=50:100",
+        "-e",
+        "MCP_RATE_LIMIT_SESSION=25:50",
+        "-e",
+        "ENABLE_TF_OPERATIONS=true",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "34cd3839-461a-404a-a290-3d3bc9d8bee3"
+        }
+      }
+    },
+    "atlassian/atlassian-mcp-server": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "28c650c6-5e61-4ab7-9eb2-505be6350476"
+        }
+      }
+    },
+    "figma/mcp-server-guide": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp",
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "26cb5bb7-a100-4f25-9a92-086ba4037345"
+        }
+      }
+    },
+    "upstash/context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "requestInit": {
+        "headers": {
+          "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+        }
+      },
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "dcec7705-b81b-4e0f-8615-8032604be7ad"
+        }
+      }
+    },
+    "github/github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "ab12cd34-5678-90ef-1234-567890abcdef"
+        }
       }
     },
     "memory": {
