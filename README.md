@@ -47,5 +47,13 @@ cd ~/.dotfiles
 stow -nvvv home
 ```
 
-## Setting up git filtering for secrets
-This is the best resource I found that I can understand https://willcarh.art/blog/a-case-for-git-filters
+## AI Tools Configuration
+Comprehensive setup and configuration for AI-powered development tools:
+
+- **[MCP (Model Context Protocol)](docs/ai-tools/mcp-setup.md)** - Configure AI assistants with secure access to local and remote resources
+- **[IntelliJ IDEA Copilot](docs/ai-tools/intellij-copilot-setup.md)** - Complete GitHub Copilot setup for IntelliJ IDEA
+- **[Copilot CLI](docs/ai-tools/copilot-cli-setup.md)** - Terminal integration for GitHub Copilot
+- **[OpenAI Codex CLI](docs/ai-tools/openai-codex-cli-setup.md)** - Command-line access to OpenAI's code generation
+- **[Custom Terraform Instructions](docs/ai-tools/terraform-instructions.md)** - Best practices for AI-generated Terraform code
+
+See the [AI Tools documentation](docs/ai-tools/) for detailed setup guides.
