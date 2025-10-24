@@ -34,6 +34,10 @@ alias sed='gsed'
 alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
+alias lzg='lazygit'
+alias lzd='lazydocker'
+alias zshrc='nvim $ZDOTDIR/.zshrc'
+alias zprofile='nvim $ZDOTDIR/.zprofile'
 alias adl="aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
 
 # Add flags to existing aliases.
