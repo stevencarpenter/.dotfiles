@@ -183,7 +183,8 @@ eval "$(zoxide init --cmd cd zsh)"
 
 export NPM_TOKEN="op://Employee/NPM/npm_token"
 export CONTEXT7_API_KEY="op://Employee/context7/context7_token"
-export OPENAI_API_KEY="op://Employee/OpenAI/api_key"
+export OPENAI_API_KEY="op://Private/3cr4bjysjxhp2e4uvnbnfdd4my/credential"
+export ASSLASIAN_API_TOKEN="op://Employee/asslasian/token"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -205,3 +206,4 @@ autoload -Uz +X bashcompinit && bashcompinit
 
 # Zshell profiling flags
 # zprof
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
