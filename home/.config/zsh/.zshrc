@@ -124,7 +124,6 @@ z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
 z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
 z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
-
 # BEGIN_AWS_SSO_CLI
 
 # AWS SSO requires `bashcompinit` which needs to be enabled once and
@@ -173,8 +172,6 @@ compdef __aws_sso_profile_complete aws-sso-profile
 complete -C /opt/homebrew/bin/aws-sso aws-sso
 # END_AWS_SSO_CLI
 
-
-
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
@@ -198,6 +195,7 @@ fpath+=$(brew --prefix)/share/zsh/site-function
 . "$HOME/.local/share/../bin/env"
 
 . "$HOME/.atuin/bin/env"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 eval "$(atuin init zsh)"
 
