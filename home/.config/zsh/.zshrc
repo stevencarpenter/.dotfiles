@@ -35,6 +35,7 @@ alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
 alias lzg='lazygit'
+alias tig='git log --reverse'
 alias lzd='lazydocker'
 alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias zprofile='nvim $ZDOTDIR/.zprofile'
@@ -183,8 +184,9 @@ eval "$(zoxide init --cmd cd zsh)"
 
 export NPM_TOKEN="op://Employee/NPM/npm_token"
 export CONTEXT7_API_KEY="op://Employee/context7/context7_token"
-export OPENAI_API_KEY="op://Private/3cr4bjysjxhp2e4uvnbnfdd4my/credential"
+export OPENAI_API_KEY="op://Employee/OPEN_AI_TOKEN/credential"
 export ASSLASIAN_API_TOKEN="op://Employee/asslasian/token"
+export OPENROUTER_TOKEN="op://Employee/OPENROUTER_TOKEN/credential"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
