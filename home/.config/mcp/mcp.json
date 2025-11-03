@@ -108,6 +108,16 @@
           "serverId": "976a2f68-e16c-4e2b-9709-7133487f8c14"
         }
       }
+    },
+    "notion/notion-mcp-server": {
+      "command": "npx",
+      "startup_timeout_sec": 90,
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.notion.com/mcp"
+      ],
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }
