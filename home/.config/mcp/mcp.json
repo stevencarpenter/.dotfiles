@@ -70,10 +70,9 @@
       ]
     },
     "git": {
-      "command": "npx",
+      "command": "uvx",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-git"
+        "mcp-server-git"
       ]
     },
     "aws-knowledge-mcp-server": {

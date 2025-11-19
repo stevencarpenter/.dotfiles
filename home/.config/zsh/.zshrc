@@ -103,9 +103,15 @@ path=(~/bin $HOME/.local/bin $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
+export NPM_CONFIG_PYTHON="$(command -v python3)"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
+
+# Load environment variables from .env file if it exists.
+z4h source "$XDG_CONFIG_HOME"/zsh/.env
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
@@ -174,24 +180,11 @@ compdef __aws_sso_profile_complete aws-sso-profile
 complete -C /opt/homebrew/bin/aws-sso aws-sso
 # END_AWS_SSO_CLI
 
-
-
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 eval "$(zoxide init --cmd cd zsh)"
-
-export NPM_TOKEN="op://Employee/NPM/npm_token"
-export CONTEXT7_API_KEY="op://Employee/context7/context7_token"
-export OPENAI_API_KEY="op://Employee/OPEN_AI_TOKEN/credential"
-export ASSLASIAN_API_TOKEN="op://Employee/asslasian/token"
-export OPENROUTER_TOKEN="op://Employee/OPENROUTER_TOKEN/credential"
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
@@ -208,4 +201,3 @@ autoload -Uz +X bashcompinit && bashcompinit
 
 # Zshell profiling flags
 # zprof
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
