@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "hashicorp-terraform-mcp-server": {
+      "type": "local",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MCP_RATE_LIMIT_GLOBAL=50:100",
+        "-e",
+        "MCP_RATE_LIMIT_SESSION=25:50",
+        "-e",
+        "ENABLE_TF_OPERATIONS=true",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "tools": ["*"]
+    },
+    "railway-mcp-server": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@railway/mcp-server"],
+      "tools": ["*"]
+    },
+    "upstash-context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "tools": ["*"]
+    },
+    "memory": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "tools": ["*"]
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "tools": ["*"]
+    },
+    "git": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"],
+      "tools": ["*"]
+    }
+  }
+}

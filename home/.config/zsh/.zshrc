@@ -35,6 +35,7 @@ alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
 alias lzg='lazygit'
+alias tig='git log --reverse'
 alias lzd='lazydocker'
 alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias zprofile='nvim $ZDOTDIR/.zprofile'
@@ -102,9 +103,15 @@ path=(~/bin $HOME/.local/bin $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
+export NPM_CONFIG_PYTHON="$(command -v python3)"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
+
+# Load environment variables from .env file if it exists.
+z4h source "$XDG_CONFIG_HOME"/zsh/.env
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
@@ -178,16 +185,6 @@ compdef _directories md
 
 eval "$(zoxide init --cmd cd zsh)"
 
-export NPM_TOKEN="op://Employee/NPM/npm_token"
-export CONTEXT7_API_KEY="op://Employee/context7/context7_token"
-export OPENAI_API_KEY="op://Private/3cr4bjysjxhp2e4uvnbnfdd4my/credential"
-export ASSLASIAN_API_TOKEN="op://Employee/asslasian/token"
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
 fpath+=$(brew --prefix)/share/zsh/site-function
@@ -204,4 +201,3 @@ autoload -Uz +X bashcompinit && bashcompinit
 
 # Zshell profiling flags
 # zprof
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
