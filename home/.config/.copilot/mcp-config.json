@@ -28,11 +28,6 @@
       "url": "https://mcp.context7.com/mcp",
       "tools": ["*"]
     },
-    "github-github-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "tools": ["*"]
-    },
     "memory": {
       "type": "local",
       "command": "npx",
@@ -49,27 +44,6 @@
       "type": "local",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-git"],
-      "tools": ["*"]
-    },
-    "aws-knowledge-mcp-server": {
-      "type": "local",
-      "command": "uvx",
-      "args": ["fastmcp", "run", "https://knowledge-mcp.global.api.aws"],
-      "tools": ["*"]
-    },
-    "microsoft-markitdown": {
-      "type": "local",
-      "command": "markitdown-mcp",
-      "args": [],
-      "tools": ["*"]
-    },
-    "notion-mcp-server": {
-      "type": "local",
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.notion.com/mcp"],
-      "env": {
-        "startup_timeout_sec": "90"
-      },
       "tools": ["*"]
     }
   }
