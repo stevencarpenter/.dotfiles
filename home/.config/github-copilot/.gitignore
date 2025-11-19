@@ -1,0 +1,15 @@
+# Ignore everything
+*
+
+# Allow this .gitignore file
+!.gitignore
+
+# Allow intellij directory and its contents
+!intellij/mcp.json
+!intellij/copilot-instructions.md
+!intellij/global-copilot-instructions.md
+!intellij/global-git-commit-instructions.md
+
+# Allow specific configuration files
+!copilot-instructions.md
+!mcp.json

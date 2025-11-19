@@ -34,10 +34,12 @@ alias sed='gsed'
 alias asp='aws-sso-profile'
 alias k='kubectl'
 alias s='stevectl'
+alias lzg='lazygit'
+alias tig='git log --reverse'
+alias lzd='lazydocker'
+alias zshrc='nvim $ZDOTDIR/.zshrc'
+alias zprofile='nvim $ZDOTDIR/.zprofile'
 alias adl="aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_SSO_ACCOUNT_ID}.dkr.ecr.${AWS_SSO_DEFAULT_REGION}.amazonaws.com"
-alias vault-login='VAULT_ADDR=SMUDGED_VAULT_HOST vault login -method=oidc'
-alias vault-logout='VAULT_ADDR=SMUDGED_VAULT_HOST vault logout'
-
 
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -A"
@@ -101,9 +103,15 @@ path=(~/bin $HOME/.local/bin $path)
 
 # Export environment variables.
 export GPG_TTY=$TTY
+export NPM_CONFIG_PYTHON="$(command -v python3)"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
+
+# Load environment variables from .env file if it exists.
+z4h source "$XDG_CONFIG_HOME"/zsh/.env
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
@@ -187,6 +195,9 @@ fpath+=$(brew --prefix)/share/zsh/site-function
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
 
 # Zshell profiling flags
 # zprof

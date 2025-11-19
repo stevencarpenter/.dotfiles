@@ -1,0 +1,122 @@
+{
+  "servers": {
+    "hashicorp/terraform-mcp-server": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MCP_RATE_LIMIT_GLOBAL=50:100",
+        "-e",
+        "MCP_RATE_LIMIT_SESSION=25:50",
+        "-e",
+        "ENABLE_TF_OPERATIONS=true",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "34cd3839-461a-404a-a290-3d3bc9d8bee3"
+        }
+      }
+    },
+    "railway-mcp-server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@railway/mcp-server"
+      ]
+    },
+    "upstash/context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "requestInit": {
+        "headers": {
+          "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+        }
+      },
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "dcec7705-b81b-4e0f-8615-8032604be7ad"
+        }
+      }
+    },
+    "github/github-mcp-server": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "ab12cd34-5678-90ef-1234-567890abcdef"
+        }
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git"
+      ]
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "fastmcp",
+        "run",
+        "https://knowledge-mcp.global.api.aws"
+      ]
+    },
+    "intellij": {
+      "type": "stdio",
+      "env": {
+        "IJ_MCP_SERVER_PORT": "64342"
+      },
+      "command": "/Applications/IntelliJ IDEA.app/Contents/jbr/Contents/Home/bin/java",
+      "args": [
+        "-classpath",
+        "/Applications/IntelliJ IDEA.app/Contents/plugins/mcpserver/lib/mcpserver-frontend.jar:/Applications/IntelliJ IDEA.app/Contents/lib/util-8.jar:/Applications/IntelliJ IDEA.app/Contents/lib/modules/intellij.libraries.ktor.client.cio.jar:/Applications/IntelliJ IDEA.app/Contents/lib/lib-client.jar:/Applications/IntelliJ IDEA.app/Contents/lib/modules/intellij.libraries.ktor.client.jar",
+        "com.intellij.mcpserver.stdio.McpStdioRunnerKt"
+      ]
+    },
+    "microsoft/markitdown": {
+      "type": "stdio",
+      "command": "binary",
+      "args": [
+        "markitdown-mcp==0.0.1a4"
+      ],
+      "x-metadata": {
+        "registry": {
+          "url": "https://api.mcp.github.com/2025-09-15/v0/servers",
+          "serverId": "976a2f68-e16c-4e2b-9709-7133487f8c14"
+        }
+      }
+    },
+    "notion/notion-mcp-server": {
+      "command": "npx",
+      "startup_timeout_sec": 90,
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.notion.com/mcp"
+      ],
+      "url": "https://mcp.notion.com/mcp"
+    }
+  }
+}

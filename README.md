@@ -36,6 +36,10 @@ brew install git stow
 git clone git@github.com:stevencarpenter/.dotfiles.git ~/
 ```
 
+On a work machine, you can clone this repo to your home directory, but make sure to run the following so we are using the correct private key for my Github.
+```shell
+git config --local core.sshCommand   'ssh -i ~/.ssh/id_ed25519_personal -o IdentitiesOnly=yes
+```
 
 ## Stow plan command. Remove n for live run.
 ```
@@ -43,10 +47,13 @@ cd ~/.dotfiles
 stow -nvvv home
 ```
 
-## Setting up git filtering for secrets
-This is the best resource I found that I can understand https://willcarh.art/blog/a-case-for-git-filters
+## AI Tools Configuration
+Comprehensive setup and configuration for AI-powered development tools:
 
-## NVIM Configuration and Plugins
-This is very much a work in progress as I feel out what I like and need. I am not writing much code in vim directly, this is  more for editing configs and such. Maybe I will become a convert, who knows.
+- **[MCP (Model Context Protocol)](docs/ai-tools/mcp-setup.md)** - Configure AI assistants with secure access to local and remote resources
+- **[IntelliJ IDEA Copilot](docs/ai-tools/intellij-copilot-setup.md)** - Complete GitHub Copilot setup for IntelliJ IDEA
+- **[Copilot CLI](docs/ai-tools/copilot-cli-setup.md)** - Terminal integration for GitHub Copilot
+- **[OpenAI Codex CLI](docs/ai-tools/openai-codex-cli-setup.md)** - Command-line access to OpenAI's code generation
+- **[Custom Terraform Instructions](docs/ai-tools/terraform-instructions.md)** - Best practices for AI-generated Terraform code
 
-99% of the credit for this goes to https://github.com/typecraft-dev/dotfiles/tree/master/nvim/.config/nvim (thanks nerd!)
+See the [AI Tools documentation](docs/ai-tools/) for detailed setup guides.
