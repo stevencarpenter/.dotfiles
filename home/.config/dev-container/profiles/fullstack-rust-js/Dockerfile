@@ -34,7 +34,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
   && rm -rf /var/lib/apt/lists/*
 
 # Global JS tooling useful for dev
-RUN npm install -g npm@latest pnpm@8 vite typescript svelte-language-server
+RUN npm install -g npm@latest pnpm@latest vite typescript svelte-language-server
 
 # Create default user; uid/gid will be remapped at runtime by entrypoint
 RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
