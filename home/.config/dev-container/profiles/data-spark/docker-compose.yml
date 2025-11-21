@@ -29,4 +29,5 @@ services:
       - ${DEV_CACHE_DIR}/${PROFILE_NAME}/sbt:/home/${DEV_USER}/.sbt
       - ${DEV_CACHE_DIR}/${PROFILE_NAME}/pyspark:/home/${DEV_USER}/.cache/pyspark
     ports:
+      # Expose Spark Web UI on port 4040
       - "4040:4040"
