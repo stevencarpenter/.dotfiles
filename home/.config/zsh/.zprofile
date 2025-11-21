@@ -2,9 +2,11 @@
 # Zsh Profile Configuration:
 # ----------------------------------------------------------------------
 # Executed once for each login shell before the shell session starts.
-# It's used for setting up environment variables and running commands
+# It's used for setting up environment variables and running commands
 # that should be executed at login.
 # ----------------------------------------------------------------------
+# Safe-to-edit zone: add/change login-only env here. Keep z4h internals
+# untouched (z4h lives in .zshenv/.zshrc). No z4h-managed content below.
 
 # The following have to go in .zprofile, because they are used by
 # macOS's /etc/zshrc file, which is sourced _before_ your`.zshrc`

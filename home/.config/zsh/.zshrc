@@ -15,7 +15,7 @@ autoload -Uz zmv
 
 # aliases
 # Note: Enclosing the value in single quotation marks (') will not expand any variables used with the command.
-# To expand the variables, use double quotation marks (").
+# To expand the variables, use double quotation marks ("").
 alias gfp='git fetch --all && git pull'
 alias docker-clean-unused='docker system prune --all --force --volumes'
 alias docker-clean-all='docker stop $(docker container ls -a -q); docker system prune -a -f --volumes'
@@ -44,6 +44,7 @@ alias adl="aws ecr get-login-password | docker login --username AWS --password-s
 # Add flags to existing aliases.
 # alias ls="${aliases[ls]:-ls} -A"
 
+# === z4h-managed knobs (safe to tweak only via documented zstyle/settings) ===
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
 # You can manually run `z4h update` to update everything.
 zstyle ':z4h:' auto-update      'no'
@@ -97,6 +98,9 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
 z4h init || return
+# === end z4h-managed section ===
+
+# === user customization zone (safe to edit) ===
 
 # Extend PATH.
 path=(~/bin $HOME/.local/bin $path)
@@ -145,7 +149,7 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 __aws_sso_profile_complete() {
      local _args=${AWS_SSO_HELPER_ARGS:- -L error}
-    _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
+    _multi_parts : "($( /opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
 }
 
 aws-sso-profile() {
@@ -184,20 +188,15 @@ function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 eval "$(zoxide init --cmd cd zsh)"
-
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
 fpath+=$(brew --prefix)/share/zsh/site-function
 
-. "$HOME/.local/share/../bin/env"
+[[ -f "$HOME/.local/share/../bin/env" ]] && . "$HOME/.local/share/../bin/env" || true
+[[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env" || true
 
-. "$HOME/.atuin/bin/env"
-export PATH="$HOME/.cargo/bin:$PATH"
+# Dev container orchestrator (optional)
+dev_env_file="${XDG_CONFIG_HOME:-$HOME/.config}/dev-container/dev-env.zsh"
+[[ -f "$dev_env_file" ]] && source "$dev_env_file" || true
 
-eval "$(atuin init zsh)"
-
-autoload -Uz +X compinit && compinit
-autoload -Uz +X bashcompinit && bashcompinit
-
-# Zshell profiling flags
-# zprof
+: # keep last status zero for prompt

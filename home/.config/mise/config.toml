@@ -35,7 +35,6 @@ tfenv = "latest"
 
 # Linters & Formatters
 golangci-lint = "latest"
-pre-commit = "latest"
 terraform-docs = "latest"
 tflint = "latest"
 trivy = "latest"
@@ -46,4 +45,3 @@ mysql = "8"
 
 # AI Tools
 claude = "latest"
-codex = "latest"
