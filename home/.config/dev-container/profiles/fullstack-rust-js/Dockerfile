@@ -33,6 +33,7 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key -o /tmp/node
   && bash /tmp/nodesource_setup.sh \
   && apt-get update \
   && apt-get install -y --no-install-recommends nodejs \
+  && rm -f /tmp/nodesource.gpg.key /tmp/nodesource_setup.sh /tmp/nodesource_setup.sh.asc \
   && rm -rf /var/lib/apt/lists/*
 
 # Global JS tooling useful for dev
