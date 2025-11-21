@@ -22,14 +22,17 @@ RUN apt-get update \
     procps \
     wget \
     tar \
+    coreutils \
   && rm -rf /var/lib/apt/lists/*
 
 # Apache Spark
 RUN mkdir -p /opt \
   && curl -fsSL "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" -o /tmp/spark.tgz \
+  && curl -fsSL "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz.sha512" -o /tmp/spark.tgz.sha512 \
+  && sha512sum -c /tmp/spark.tgz.sha512 \
   && tar -xzf /tmp/spark.tgz -C /opt \
   && mv "/opt/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}" /opt/spark \
-  && rm /tmp/spark.tgz
+  && rm /tmp/spark.tgz /tmp/spark.tgz.sha512
 
 ENV SPARK_HOME=/opt/spark
 ENV PATH="${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}"
