@@ -31,7 +31,7 @@ fi
 if command -v realpath >/dev/null 2>&1; then
   DEV_HOME_ABS="$(realpath -m "$DEV_HOME")"
 else
-  DEV_HOME_ABS="$(readlink -f "$DEV_HOME")"
+  DEV_HOME_ABS="$(readlink -m "$DEV_HOME")"
 fi
 case "$DEV_HOME_ABS" in
   /home/*) ;;
