@@ -192,7 +192,7 @@ eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
 fpath+=$(brew --prefix)/share/zsh/site-function
 
-[[ -f "$HOME/.local/share/../bin/env" ]] && . "$HOME/.local/share/../bin/env" || true
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env" || true
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env" || true
 eval "$(atuin init zsh)"
 
