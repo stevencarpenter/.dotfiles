@@ -9,7 +9,10 @@ DEV_SHELL="${DEV_SHELL:-/bin/zsh}"
 
 group_name="$DEV_USER"
 if ! getent group "$DEV_GID" >/dev/null 2>&1; then
-  groupadd -g "$DEV_GID" "$group_name" 2>/dev/null || group_name="devgroup"
+  if ! groupadd -g "$DEV_GID" "$group_name" 2>/dev/null; then
+    group_name="devgroup"
+    groupadd -g "$DEV_GID" "$group_name"
+  fi
 fi
 
 if id -u "$DEV_USER" >/dev/null 2>&1; then
