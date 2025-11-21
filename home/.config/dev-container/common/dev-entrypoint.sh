@@ -13,6 +13,9 @@ if ! getent group "$DEV_GID" >/dev/null 2>&1; then
     group_name="devgroup"
     groupadd -g "$DEV_GID" "$group_name"
   fi
+else
+  # Group exists, get its name
+  group_name=$(getent group "$DEV_GID" | cut -d: -f1)
 fi
 
 if id -u "$DEV_USER" >/dev/null 2>&1; then
