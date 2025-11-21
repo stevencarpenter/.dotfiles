@@ -24,10 +24,12 @@ RUN apt-get update \
     procps \
   && rm -rf /var/lib/apt/lists/*
 
-# Node.js 20.x
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh \
-  && [ -s /tmp/nodesource_setup.sh ] \
-  # Security note: The script is executed after download. Consider verifying its contents or source. \
+# Node.js 20.x (with GPG verification)
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key -o /tmp/nodesource.gpg.key \
+  && gpg --import /tmp/nodesource.gpg.key \
+  && curl -fsSL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh \
+  && curl -fsSL https://deb.nodesource.com/setup_20.x.asc -o /tmp/nodesource_setup.sh.asc \
+  && gpg --verify /tmp/nodesource_setup.sh.asc /tmp/nodesource_setup.sh \
   && bash /tmp/nodesource_setup.sh \
   && apt-get update \
   && apt-get install -y --no-install-recommends nodejs \
