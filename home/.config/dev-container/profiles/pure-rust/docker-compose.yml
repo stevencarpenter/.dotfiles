@@ -23,5 +23,5 @@ services:
       - ${HOST_HOME}/.ssh:/home/${DEV_USER}/.ssh:ro
       - ${HOST_HOME}/.gitconfig:/home/${DEV_USER}/.gitconfig:ro
       - ${HOST_HOME}/.config/zsh:/home/${DEV_USER}/.config/zsh:ro
-      - ${HOST_HOME}/.cargo/registry:/home/${DEV_USER}/.cargo/registry
-      - ${HOST_HOME}/.cargo/git:/home/${DEV_USER}/.cargo/git
+      - ${DEV_CACHE_DIR}/cargo/registry:/home/${DEV_USER}/.cargo/registry
+      - ${DEV_CACHE_DIR}/cargo/git:/home/${DEV_USER}/.cargo/git
