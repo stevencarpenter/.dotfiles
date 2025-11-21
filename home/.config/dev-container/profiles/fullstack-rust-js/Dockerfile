@@ -51,7 +51,7 @@ USER ${USERNAME}
 RUN set -eux; \
   curl -sSfL https://sh.rustup.rs -o /tmp/rustup-init.sh; \
   curl -sSfL https://static.rust-lang.org/rustup/checksums.txt -o /tmp/rustup-checksums.txt; \
-  EXPECTED_SHA256="$(grep 'sh.rustup.rs' /tmp/rustup-checksums.txt | awk '{print $1}')" ; \
+  EXPECTED_SHA256="$(awk '$2 == "sh.rustup.rs" {print $1}' /tmp/rustup-checksums.txt)" ; \
   ACTUAL_SHA256="$(sha256sum /tmp/rustup-init.sh | awk '{print $1}')" ; \
   if [ "$EXPECTED_SHA256" != "$ACTUAL_SHA256" ]; then \
     echo "rustup-init.sh checksum verification failed!" >&2; \
