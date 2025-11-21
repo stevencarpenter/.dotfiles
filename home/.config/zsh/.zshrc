@@ -190,7 +190,7 @@ compdef _directories md
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(direnv hook zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
-fpath+=$(brew --prefix)/share/zsh/site-function
+fpath+=$(brew --prefix)/share/zsh/site-functions
 
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env" || true
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env" || true
