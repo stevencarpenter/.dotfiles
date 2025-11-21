@@ -48,5 +48,6 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal \
 
 WORKDIR /work
 COPY common/dev-entrypoint.sh /usr/local/bin/dev-entrypoint
+RUN chmod +x /usr/local/bin/dev-entrypoint
 ENTRYPOINT ["dev-entrypoint"]
 CMD ["/bin/zsh"]
