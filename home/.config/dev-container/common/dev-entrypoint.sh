@@ -16,7 +16,10 @@ if ! getent group "$DEV_GID" >/dev/null 2>&1; then
 fi
 
 if id -u "$DEV_USER" >/dev/null 2>&1; then
-  usermod -u "$DEV_UID" -g "$group_name" "$DEV_USER"
+  if ! usermod -u "$DEV_UID" -g "$group_name" -d "$DEV_HOME" "$DEV_USER"; then
+    echo "Error: usermod failed to update user '$DEV_USER'. The user may have running processes or own files. Please resolve and retry." >&2
+    exit 1
+  fi
 else
   useradd -m -d "$DEV_HOME" -s "$DEV_SHELL" -u "$DEV_UID" -g "$group_name" "$DEV_USER"
 fi
