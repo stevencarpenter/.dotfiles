@@ -149,7 +149,7 @@ z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
 
 __aws_sso_profile_complete() {
      local _args=${AWS_SSO_HELPER_ARGS:- -L error}
-    _multi_parts : "($( /opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
+    _multi_parts : "($(/opt/homebrew/bin/aws-sso ${=_args} list --csv Profile))"
 }
 
 aws-sso-profile() {
