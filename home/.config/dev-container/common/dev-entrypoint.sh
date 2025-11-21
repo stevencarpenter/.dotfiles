@@ -27,15 +27,19 @@ else
   useradd -m -d "$DEV_HOME" -s "$DEV_SHELL" -u "$DEV_UID" -g "$group_name" "$DEV_USER"
 fi
 
-mkdir -p "$DEV_HOME" /work
-# Validate that DEV_HOME is a subdirectory of /home before chown -R
-DEV_HOME_ABS="$(readlink -f "$DEV_HOME")"
+# Validate that DEV_HOME is a subdirectory of /home before creating or chowning
+if command -v realpath >/dev/null 2>&1; then
+  DEV_HOME_ABS="$(realpath -m "$DEV_HOME")"
+else
+  DEV_HOME_ABS="$(readlink -f "$DEV_HOME")"
+fi
 case "$DEV_HOME_ABS" in
   /home/*) ;;
   *)
-    echo "Error: DEV_HOME ($DEV_HOME_ABS) is not a subdirectory of /home. Refusing to chown recursively for safety." >&2
+    echo "Error: DEV_HOME ($DEV_HOME_ABS) is not a subdirectory of /home. Refusing to create or chown recursively for safety." >&2
     exit 1
 esac
+mkdir -p "$DEV_HOME" /work
 chown -R "$DEV_UID":"$DEV_GID" "$DEV_HOME"
 chown "$DEV_UID":"$DEV_GID" /work
 
