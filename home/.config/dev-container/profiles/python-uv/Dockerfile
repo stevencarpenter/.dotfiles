@@ -30,5 +30,6 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
 
 WORKDIR /work
 COPY common/dev-entrypoint.sh /usr/local/bin/dev-entrypoint
+RUN chmod +x /usr/local/bin/dev-entrypoint
 ENTRYPOINT ["dev-entrypoint"]
 CMD ["/bin/zsh"]
