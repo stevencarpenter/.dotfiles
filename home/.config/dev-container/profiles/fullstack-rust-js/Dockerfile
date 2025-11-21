@@ -47,9 +47,20 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
 # Rust toolchain
 ENV PATH="/home/${USERNAME}/.cargo/bin:${PATH}"
 USER ${USERNAME}
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal \
-  && . /home/${USERNAME}/.cargo/env \
-  && rustup component add clippy rustfmt rust-analyzer
+# Download rustup installer and verify checksum before running
+RUN set -eux; \
+  curl -sSfL https://sh.rustup.rs -o /tmp/rustup-init.sh; \
+  curl -sSfL https://static.rust-lang.org/rustup/checksums.txt -o /tmp/rustup-checksums.txt; \
+  EXPECTED_SHA256="$(grep 'sh.rustup.rs' /tmp/rustup-checksums.txt | awk '{print $1}')" ; \
+  ACTUAL_SHA256="$(sha256sum /tmp/rustup-init.sh | awk '{print $1}')" ; \
+  if [ "$EXPECTED_SHA256" != "$ACTUAL_SHA256" ]; then \
+    echo "rustup-init.sh checksum verification failed!" >&2; \
+    exit 1; \
+  fi; \
+  sh /tmp/rustup-init.sh -y --profile minimal; \
+  rm -f /tmp/rustup-init.sh /tmp/rustup-checksums.txt; \
+  . /home/${USERNAME}/.cargo/env; \
+  rustup component add clippy rustfmt rust-analyzer
 USER root
 
 WORKDIR /work
