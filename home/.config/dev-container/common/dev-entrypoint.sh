@@ -13,9 +13,9 @@ if ! getent group "$DEV_GID" >/dev/null 2>&1; then
 fi
 
 if id -u "$DEV_USER" >/dev/null 2>&1; then
-  usermod -u "$DEV_UID" -g "$DEV_GID" "$DEV_USER"
+  usermod -u "$DEV_UID" -g "$group_name" "$DEV_USER"
 else
-  useradd -m -d "$DEV_HOME" -s "$DEV_SHELL" -u "$DEV_UID" -g "$DEV_GID" "$DEV_USER"
+  useradd -m -d "$DEV_HOME" -s "$DEV_SHELL" -u "$DEV_UID" -g "$group_name" "$DEV_USER"
 fi
 
 mkdir -p "$DEV_HOME" /work
