@@ -48,7 +48,7 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
 ENV PATH="/home/${USERNAME}/.cargo/bin:${PATH}"
 USER ${USERNAME}
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal \
-  && source /home/${USERNAME}/.cargo/env \
+  && . /home/${USERNAME}/.cargo/env \
   && rustup component add clippy rustfmt rust-analyzer
 USER root
 
