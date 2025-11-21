@@ -5,4 +5,6 @@ if [ -d "$DEV_CONTAINER_ROOT/bin" ]; then
 fi
 
 de() { dev-env "$@"; }
-compdef _gnu_generic dev-env de
+if (( ${+functions[compdef]} )); then
+  compdef _gnu_generic dev-env de 2>/dev/null || true
+fi
