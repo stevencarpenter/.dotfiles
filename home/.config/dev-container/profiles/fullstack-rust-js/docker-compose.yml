@@ -37,9 +37,10 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: dev
-      POSTGRES_DB: dev
+      # Use environment variables for database credentials. Change these for non-local use!
+      POSTGRES_USER: ${POSTGRES_USER:-dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev}
+      POSTGRES_DB: ${POSTGRES_DB:-dev}
     ports:
       - "5432:5432"
     volumes:
