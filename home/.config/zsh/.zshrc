@@ -198,5 +198,3 @@ fpath+=$(brew --prefix)/share/zsh/site-function
 # Dev container orchestrator (optional)
 dev_env_file="${XDG_CONFIG_HOME:-$HOME/.config}/dev-container/dev-env.zsh"
 [[ -f "$dev_env_file" ]] && source "$dev_env_file" || true
-
-: # keep last status zero for prompt
