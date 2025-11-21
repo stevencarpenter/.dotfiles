@@ -50,3 +50,5 @@ services:
     command: [ "redis-server", "--appendonly", "yes" ]
     ports:
       - "6379:6379"
+    volumes:
+      - ${DEV_CACHE_DIR}/${PROFILE_NAME}/redis:/data
