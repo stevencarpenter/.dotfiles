@@ -31,7 +31,9 @@ services:
       - db
       - redis
     ports:
+      # Vite development server (frontend)
       - "5173:5173"
+      # General-purpose web server (e.g., backend API, Next.js, Express)
       - "3000:3000"
   db:
     image: postgres:16-alpine
