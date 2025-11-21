@@ -30,10 +30,12 @@ fi
 mkdir -p "$DEV_HOME" /work
 # Validate that DEV_HOME is a subdirectory of /home before chown -R
 DEV_HOME_ABS="$(readlink -f "$DEV_HOME")"
-if [[ "$DEV_HOME_ABS" != /home/* ]]; then
-  echo "Error: DEV_HOME ($DEV_HOME_ABS) is not a subdirectory of /home. Refusing to chown recursively for safety." >&2
-  exit 1
-fi
+case "$DEV_HOME_ABS" in
+  /home/*) ;;
+  *)
+    echo "Error: DEV_HOME ($DEV_HOME_ABS) is not a subdirectory of /home. Refusing to chown recursively for safety." >&2
+    exit 1
+esac
 chown -R "$DEV_UID":"$DEV_GID" "$DEV_HOME"
 chown "$DEV_UID":"$DEV_GID" /work
 
