@@ -25,7 +25,10 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Node.js 20.x
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh \
+  && [ -s /tmp/nodesource_setup.sh ] \
+  # Security note: The script is executed after download. Consider verifying its contents or source. \
+  && bash /tmp/nodesource_setup.sh \
   && apt-get update \
   && apt-get install -y --no-install-recommends nodejs \
   && rm -rf /var/lib/apt/lists/*
