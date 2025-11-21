@@ -22,7 +22,7 @@ services:
     volumes:
       - ${DEV_WORKDIR:-.}:/work
       - ${HOST_HOME}/.ssh:/home/${DEV_USER}/.ssh:ro
-      - ${HOST_HOME}/.aws:/home/${DEV_USER}/.aws
+      - ${HOST_HOME}/.aws:/home/${DEV_USER}/.aws:ro
       - ${HOST_HOME}/.gitconfig:/home/${DEV_USER}/.gitconfig:ro
       - ${HOST_HOME}/.config/zsh:/home/${DEV_USER}/.config/zsh:ro
       - ${DEV_CACHE_DIR}/${PROFILE_NAME}/terraform:/home/${DEV_USER}/.terraform.d
