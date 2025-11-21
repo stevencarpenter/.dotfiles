@@ -43,8 +43,7 @@ RUN groupadd --gid "${USER_GID}" "${USERNAME}" \
 
 # Rust toolchain
 ENV PATH="/home/${USERNAME}/.cargo/bin:${PATH}"
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal \
-  && rustup component add clippy rustfmt rust-analyzer
+RUN gosu ${USERNAME} bash -c "curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal && source /home/${USERNAME}/.cargo/env && rustup component add clippy rustfmt rust-analyzer"
 
 WORKDIR /work
 COPY common/dev-entrypoint.sh /usr/local/bin/dev-entrypoint
